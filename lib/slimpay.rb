@@ -1,5 +1,6 @@
 require "slimpay/version"
 require 'oauth2'
+require 'httparty'
 
 require 'active_support/core_ext/string/inflections'
 
@@ -30,11 +31,7 @@ module Slimpay
     if http_response.code >= 400
       Slimpay::Error.manage_errors(http_response)
     else
-      if http_response.start_with?('{')
-        return JSON.parse(http_response.parsed_response)
-      else
-        return http_response
-      end
+      http_response
     end
   end
 end

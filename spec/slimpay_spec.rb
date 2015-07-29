@@ -5,7 +5,7 @@ describe Slimpay do
     expect(Slimpay::VERSION).not_to be nil
   end
 
-  it 'does something useful' do
-    expect(false).to eq(true)
+  it '.answers to nil' do
+    expect(Slimpay.answer(nil)).not_to be nil
   end
 end

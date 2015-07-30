@@ -11,7 +11,7 @@ module Slimpay
     # error:"invalid_token", error_description: "Invalid access token: 1234-123456-abcdef-123456"
     # code: 205, message: "Client data are inconsistent : missing query parameters creditorReference and/or rum"
     def self.manage_errors(http_response)
-      return display_http_error(http_response) unless http_response.code.nil?
+      return display_http_error(http_response) if defined?(http_response.code)
       http_response
     end
 

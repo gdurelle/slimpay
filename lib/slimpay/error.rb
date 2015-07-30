@@ -1,7 +1,8 @@
 module Slimpay
+  # To display Slimpay error messages with the HTTP code.
   class Error
     def self.empty
-      { code: 418, message: "The answer was empty."}
+      { code: 418, message: 'The answer was empty.' }
     end
 
     # code: 906 message: "Error : Could not find acceptable representation"
@@ -13,6 +14,8 @@ module Slimpay
       return display_http_error(http_response) if http_response.code.present?
       http_response
     end
+
+    private
 
     def display_http_error(http_response)
       case http_response.code
@@ -30,22 +33,26 @@ module Slimpay
     end
 
     def self.bad_request(message)
-      slimerror = JSON.parse(message)
-      { code: 400, message: "HTTP Bad Request. Slimpay #{slimerror['code']} : #{slimerror['message']}"}
+      { code: 400, message: "HTTP Bad Request. #{ slimpay_error(message) }" }
     end
 
     def self.forbidden(message)
-      slimerror = JSON.parse(message)
-      { code: 403, message: "HTTP Forbidden. Slimpay #{slimerror['code']} : #{slimerror['message']}"}
+      { code: 403, message: "HTTP Forbidden. #{ slimpay_error(message) }" }
     end
 
     def self.not_found
-      { code: 404, message: "URI not found."}
+      { code: 404, message: 'URI not found.' }
     end
 
     def self.not_acceptable(message)
-      slimerror = JSON.parse(message)
-      { code: 406, message: "HTTP Not Acceptable. Slimpay #{slimerror['code']} : #{slimerror['message']}"}
+      { code: 406, message: "HTTP Not Acceptable. #{ slimpay_error(message) }" }
+    end
+
+    def slimpay_error(http_message)
+      slimpay_error = JSON.parse(http_message)
+      slimpay_code = slimpay_error['code']
+      slimpay_message = slimpay_error['message']
+      "Slimpay #{ slimpay_code } : #{ slimpay_message }"
     end
   end
 end

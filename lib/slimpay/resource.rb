@@ -29,7 +29,7 @@ module Slimpay
       res = JSON.parse(response)
       res['descriptor'].each do |api_hash|
         next unless api_method?(api_hash['id'])
-        define_api_method
+        define_api_method(api_hash)
       end
       list_api_methods(res)
     end

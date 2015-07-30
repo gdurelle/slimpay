@@ -1,6 +1,6 @@
 # Slimpay
 
-Implements the Slimpay Hypermedia API.
+Ruby implementation of the Slimpay Hypermedia API.
 
 ## Installation
 
@@ -20,7 +20,63 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Available resources : **Order**, **Mandate**, **App**
+
+Each resource defines its own methods according to the API.
+
+**Example:**
+```zsh
+Slimpay::Order.new.api_methods
+=> ["get_order", "patch_order", "create_orders", "get_orders"]
+```
+
+Some methods as been added in this gem as shortcuts to these.
+
+**Example:**
+
+The official API method:
+```ruby
+orders = Slimpay::Order.new(client_id = '1234', client_secret = '987654321', creditor_reference = 'azerty')
+orders.get_orders({creditorReference: @creditor_reference, reference: 1234})
+```
+The shortcut:
+```ruby
+orders = Slimpay::Order.new(client_id = '1234', client_secret = '987654321', creditor_reference = 'azerty')
+orders.get_one(1234)
+```
+
+### Root endpoint resources:
+
+```ruby
+slimpay = Slimpay::Base.new(client_id = '1234', client_secret = '987654321', creditor_reference = 'azerty')
+slimpay.api_methods
+```
+:warning: If you call ```Slimpay::Base.new``` without arguments, the _Sandbox_ credentials will be used.
+
+### Get a specific Order
+If your Order as a reference key = 1234
+
+```ruby
+ orders = Slimpay::Order.new
+ orders.get_one(1234)
+```
+
+result will be a Hash:
+
+```json
+{"_links"=>
+  {"self"=>{"href"=>"https://api-sandbox.slimpay.net/creditors/democreditor/orders/1"},
+   "https://api.slimpay.net/alps#get-creditor"=>{"href"=>"https://api-sandbox.slimpay.net/creditors/democreditor"},
+   "https://api.slimpay.net/alps#get-subscriber"=>{"href"=>"https://api-sandbox.slimpay.net/creditors/democreditor/orders/1/subscribers/subscriber01"},
+   "https://api.slimpay.net/alps#user-approval"=>{"href"=>"https://slimpay.net/slimpaytpe16/userApproval?accessCode=spK534N0cuZztBGwj2FjC6eKzcsKFRzXbfy8buloUHiZV6p9PhIfcPgV7c507R"},
+   "https://api.slimpay.net/alps#get-order-items"=>{"href"=>"https://api-sandbox.slimpay.net/creditors/democreditor/orders/1/items"},
+   "https://api.slimpay.net/alps#get-mandate"=>{"href"=>"https://api-sandbox.slimpay.net/creditors/democreditor/mandates/1"}},
+ "reference"=>"1",
+ "state"=>"closed.completed",
+ "started"=>true,
+ "dateCreated"=>"2014-12-12T09:35:39.000+0000",
+ "mandateReused"=>false}
+```
 
 ## Development
 

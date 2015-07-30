@@ -4,7 +4,7 @@ module Slimpay
   # Usage:
   #   >> Slimpay::Base.new
   class Base
-    def initialize(client_id, client_secret, creditor_reference)
+    def initialize(client_id = nil, client_secret = nil, creditor_reference = nil)
       @client_id = client_id || SANDBOX_CLIENT_ID
       @client_secret = client_secret || SANDBOX_SECRET_ID
       @creditor_reference = creditor_reference || SANDBOX_CREDITOR

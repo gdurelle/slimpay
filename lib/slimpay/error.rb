@@ -14,6 +14,8 @@ module Slimpay
     end
 
     # Returns either formated error with its HTTP code or the raw HTTP response.
+    # ===== Arguments:
+    #   http_response: (HTTParty::Response)
     def self.manage_errors(http_response)
       return display_http_error(http_response) if defined?(http_response.code)
       http_response
@@ -21,7 +23,7 @@ module Slimpay
 
     private
 
-    def display_http_error(http_response)
+    def self.display_http_error(http_response)
       case http_response.code
       when 400
         return Slimpay::Error.bad_request(http_response)

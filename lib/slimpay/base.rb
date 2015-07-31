@@ -1,8 +1,35 @@
 module Slimpay
-  # Base class defines constants and main variables, requests options, and retrieve the oauth token.
-  # It also defines first resources GET methods.
-  # Usage:
-  #   >> Slimpay::Base.new
+  # Defines constants, main variables, requests options.
+  #
+  # Connect to the HAPI through OAuth2 and generates HAPI's first resources GET methods.
+  # ===== Usage:
+  #   >> slimpay = Slimpay::Base.new(client_id = '1234', client_secret = '987654321', creditor_reference = 'azerty')
+  #   >> slimpay.api_methods
+  #   =>
+  #     {"apps"=>"https://api-sandbox.slimpay.net/alps/v1/apps"}
+  #     {"bank_accounts"=>"https://api-sandbox.slimpay.net/alps/v1/bank-accounts"}
+  #     {"billing_addresses"=>"https://api-sandbox.slimpay.net/alps/v1/billing-addresses"}
+  #     {"binary_contents"=>"https://api-sandbox.slimpay.net/alps/v1/binary-contents"}
+  #     {"card_transactions"=>"https://api-sandbox.slimpay.net/alps/v1/card-transactions"}
+  #     {"card_transaction_issues"=>"https://api-sandbox.slimpay.net/alps/v1/card-transaction-issues"}
+  #     {"creditors"=>"https://api-sandbox.slimpay.net/alps/v1/creditors"}
+  #     {"direct_debits"=>"https://api-sandbox.slimpay.net/alps/v1/direct-debits"}
+  #     {"direct_debit_issues"=>"https://api-sandbox.slimpay.net/alps/v1/direct-debit-issues"}
+  #     {"documents"=>"https://api-sandbox.slimpay.net/alps/v1/documents"}
+  #     {"errors"=>"https://api-sandbox.slimpay.net/alps/v1/errors"}
+  #     {"mandates"=>"https://api-sandbox.slimpay.net/alps/v1/mandates"}
+  #     {"orders"=>"https://api-sandbox.slimpay.net/alps/v1/orders"}
+  #     {"order_items"=>"https://api-sandbox.slimpay.net/alps/v1/order-items"}
+  #     {"postal_addresses"=>"https://api-sandbox.slimpay.net/alps/v1/postal-addresses"}
+  #     {"recurrent_direct_debits"=>"https://api-sandbox.slimpay.net/alps/v1/recurrent-direct-debits"}
+  #     {"signatories"=>"https://api-sandbox.slimpay.net/alps/v1/signatories"}
+  #     {"subscribers"=>"https://api-sandbox.slimpay.net/alps/v1/subscribers"}
+  #     {"user_approvals"=>"https://api-sandbox.slimpay.net/alps/v1/user-approvals"}
+  #
+  # ===== Arguments
+  #   client_id: (String)
+  #   client_secret: (String)
+  #   creditor_reference: (String)
   class Base
     def initialize(client_id = nil, client_secret = nil, creditor_reference = nil)
       @client_id = client_id || SANDBOX_CLIENT_ID
@@ -47,10 +74,10 @@ module Slimpay
 
     # Create the 'api_methods' instance method to retrieve an array of API methods previously created.
     #
-    #   Usage:
-    #     >> slim = Slimpay::Base.new
-    #     >> slim.api_methods
-    #     => [apps, creditors, direct_debits, mandates, orders, recurrent_direct_debits, subscribers, ...]
+    # ===== Usage:
+    #   >> slim = Slimpay::Base.new
+    #   >> slim.api_methods
+    #   => [apps, creditors, direct_debits, mandates, orders, recurrent_direct_debits, subscribers, ...]
     def list_api_methods(endpoint_results)
       self.class.send(:define_method, 'api_methods') do
         return endpoint_results['descriptor'].map { |api_hash| { api_hash['name'].underscore => api_hash['href'] } }

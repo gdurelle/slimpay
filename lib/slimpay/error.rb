@@ -1,15 +1,19 @@
 module Slimpay
   # To display Slimpay error messages with the HTTP code.
+  #
+  # ==== Possible HAPI errors
+  # * code: 906 message: "Error : Could not find acceptable representation"
+  # * code: 906 message: "Error : Request method 'POST' not supported"
+  # * code: 904 message: "Access denied : cannot access creditor democreditor"
+  # * error:"invalid_token", error_description: "Invalid access token: 1234-123456-abcdef-123456"
+  # * code: 205, message: "Client data are inconsistent : missing query parameters creditorReference and/or rum"
   class Error
+    # If the HTTP response is nil or empty returns an actual message.
     def self.empty
       { code: 418, message: 'The answer was empty.' }
     end
 
-    # code: 906 message: "Error : Could not find acceptable representation"
-    # code: 906 message: "Error : Request method 'POST' not supported"
-    # code: 904 message: "Access denied : cannot access creditor democreditor"
-    # error:"invalid_token", error_description: "Invalid access token: 1234-123456-abcdef-123456"
-    # code: 205, message: "Client data are inconsistent : missing query parameters creditorReference and/or rum"
+    # Returns either formated error with its HTTP code or the raw HTTP response.
     def self.manage_errors(http_response)
       return display_http_error(http_response) if defined?(http_response.code)
       http_response

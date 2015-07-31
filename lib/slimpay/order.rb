@@ -1,12 +1,11 @@
 module Slimpay
-  # Order class inherits from Resouce and thus defines its
-  # associated resource's methods.
-  # It also defines shortcut methods for the same
-  # create_order method with various arguments.
+  # Inherits from Resouce and thus defines its associated resource's methods.
+  #
+  # Defines shortcut methods for the create_order method with various arguments.
   class Order < Resource
-    # Override the get_one method because the url is not the same for Orders
+    # Override the Resource#get_one method because the url is not the same for Orders
     #
-    # Example:
+    # ===== Example:
     #   >> orders = Slimpay::Order.new
     #   >> orders.get_one
     #   =>
@@ -22,7 +21,7 @@ module Slimpay
     #      "started"=>true,
     #      "dateCreated"=>"2014-12-12T09:35:39.000+0000",
     #      "mandateReused"=>false}
-    # Arguments:
+    # ===== Arguments:
     #   reference: (String)
     def get_one(reference = 1)
       query_options = "creditorReference=#{@creditor_reference}&reference=#{reference}"

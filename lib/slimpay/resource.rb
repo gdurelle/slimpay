@@ -1,15 +1,17 @@
 module Slimpay
-  # Resource class defines an abstract resource to be inherited from.
-  # Defines resource's non-semantic methods.
+  # An abstract resource to be inherited from.
+  #
+  # Defines HAPI resource non-semantic methods.
   class Resource < Base
-    # Shortcut methods to get a resource with only resource's reference.
+    # Shortcut method to get a resource with only resource's reference.
     #
-    # The above example shall return the same result as get_mandates({creditorReference: @creditor_reference, reference: 1})
+    # The above example shall return the same result as
+    #   get_mandates({creditorReference: @creditor_reference, reference: 1})
     #
-    # Example:
+    # ===== Example:
     #   >> mandates = Slimpay::Mandate.new
     #   >> mandates.get_one
-    # Arguments:
+    # ===== Arguments:
     #   reference: (String)
     def get_one(reference = 1)
       resource_name = @resource_name
@@ -21,7 +23,7 @@ module Slimpay
     private
 
     # Retrieve and define get/post methods for each non-semantic methods.
-    # Example:
+    # ===== Example:
     #   >> order = Slimpay::Order.new
     #   >> order.get_orders({creditorReference: @creditor_reference, reference: 1})
     def generate_api_methods
@@ -35,7 +37,7 @@ module Slimpay
     end
 
     # Define a specific method from the API
-    # Arguments:
+    # ===== Arguments:
     #   api_hash: (Hash)
     def define_api_method(api_hash)
       self.class.send(:define_method, api_hash['id'].underscore) do |arguments|

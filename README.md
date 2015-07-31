@@ -20,11 +20,21 @@ Or install it yourself as:
 
 ## Usage
 
-Available resources : **Order**, **Mandate**, **App**
+**API Docs: https://api-sandbox.slimpay.net/docs/**
 
-Each resource defines its own methods according to the API.
+**SANDBOX CREDENTIALS :**
+
+* client_id =  'democreditor01'
+* client_secret = 'demosecret01'
+* creditor_reference : democreditor
+
+### Available resources :
+**Order**, **Mandate**, **App**
+
+Each resource defines its own methods according to the Slimpay API.
 
 **Example:**
+
 ```zsh
 Slimpay::Order.new.api_methods
 => ["get_order", "patch_order", "create_orders", "get_orders"]
@@ -35,11 +45,14 @@ Some methods as been added in this gem as shortcuts to these.
 **Example:**
 
 The official API method:
+
 ```ruby
 orders = Slimpay::Order.new(client_id = '1234', client_secret = '987654321', creditor_reference = 'azerty')
 orders.get_orders({creditorReference: @creditor_reference, reference: 1234})
 ```
+
 The shortcut:
+
 ```ruby
 orders = Slimpay::Order.new(client_id = '1234', client_secret = '987654321', creditor_reference = 'azerty')
 orders.get_one(1234)
@@ -57,8 +70,8 @@ slimpay.api_methods
 If your Order as a reference key = 1234
 
 ```ruby
- orders = Slimpay::Order.new
- orders.get_one(1234)
+orders = Slimpay::Order.new
+orders.get_one(1234)
 ```
 
 result will be a Hash:
@@ -86,7 +99,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/slimpay. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/gdurelle/slimpay. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
 
 
 ## License

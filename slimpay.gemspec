@@ -14,6 +14,8 @@ Gem::Specification.new do |spec|
   spec.homepage      = "TODO: Put your gem's website or public repo URL here."
   spec.license       = 'MIT'
 
+  spec.post_install_message = %(Please refer to Slimpay's API https://api-sandbox.slimpay.net/docs for more informations.)
+
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
   # delete this section to allow pushing this gem to any host.
   if spec.respond_to?(:metadata)

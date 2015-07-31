@@ -30,7 +30,9 @@ module Slimpay
   def self.answer(http_response)
     return Slimpay::Error.empty if http_response.nil?
     if http_response.code >= 400
-      fail Slimpay::Error.manage_errors(http_response)
+      error = Slimpay::Error.new(http_response)
+      $stdout.puts error.message
+      fail error, error.message
     else
       http_response
     end
@@ -38,3 +40,5 @@ module Slimpay
 end
 
 # # TODO: If-None-Match support. (next answer ?= 304)
+# require 'slimpay'
+# slimpay = Slimpay::Base.new

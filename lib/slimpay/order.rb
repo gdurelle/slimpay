@@ -25,7 +25,7 @@ module Slimpay
     #   reference: (String)
     def get_one(reference = 1)
       query_options = "creditorReference=#{@creditor_reference}&reference=#{reference}"
-      Slimpay.answer(HTTParty.get("#{@endpoint}/orders?#{query_options}", headers: options))
+      Slimpay.answer(HTTParty.get("#{@endpoint}/#{@resource_name}?#{query_options}", headers: options))
     end
 
     # POST
@@ -43,7 +43,7 @@ module Slimpay
         }],
         started: true
       }
-      HTTParty.post("#{@endpoint}#{@api_suffix}#{url}", body: body_options, headers: options)
+      HTTParty.post("#{@endpoint}#{url}", body: body_options, headers: options)
     end
 
     # POST
@@ -77,7 +77,7 @@ module Slimpay
         }],
         started: true
       }
-      HTTParty.post("#{@endpoint}#{@api_suffix}#{url}", body: body_options, headers: options)
+      HTTParty.post("#{@endpoint}#{url}", body: body_options, headers: options)
     end
   end
 end

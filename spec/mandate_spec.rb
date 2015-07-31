@@ -19,12 +19,6 @@ describe Slimpay::Mandate do
     expect(Slimpay::Mandate.new).to be_an_instance_of Slimpay::Mandate
   end
 
-  it 'has its API methods generated' do
-    allow_any_instance_of(Slimpay::Mandate).to receive(:oauth)
-    expect(Slimpay::Mandate.new).to respond_to :get_mandates
-    expect(Slimpay::Mandate.new).to respond_to :get_mandate
-  end
-
   it 'has a get_one method' do
     allow_any_instance_of(Slimpay::Mandate).to receive(:oauth)
     allow_any_instance_of(Slimpay::Mandate).to receive(:generate_api_methods)

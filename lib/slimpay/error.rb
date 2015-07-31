@@ -7,7 +7,8 @@ module Slimpay
   # * code: 904 message: "Access denied : cannot access creditor democreditor"
   # * error:"invalid_token", error_description: "Invalid access token: 1234-123456-abcdef-123456"
   # * code: 205, message: "Client data are inconsistent : missing query parameters creditorReference and/or rum"
-  class Error
+  class Error < StandardError
+    attr_reader :message
     # If the HTTP response is nil or empty returns an actual message.
     def self.empty
       { code: 418, message: 'The answer was empty.' }
@@ -16,42 +17,49 @@ module Slimpay
     # Returns either formated error with its HTTP code or the raw HTTP response.
     # ===== Arguments:
     #   http_response: (HTTParty::Response)
-    def self.manage_errors(http_response)
-      return display_http_error(http_response) if defined?(http_response.code)
-      http_response
+    def initialize(http_response)
+      if defined?(http_response.code)
+        display_http_error(http_response)
+      else
+        @message = http_response
+      end
+    end
+
+    def to_s
+      @message
     end
 
     private
 
-    def self.display_http_error(http_response)
+    def display_http_error(http_response)
       case http_response.code
       when 400
-        return Slimpay::Error.bad_request(http_response)
+        @message = bad_request(http_response)
       when 403
-        return Slimpay::Error.forbidden(http_response)
+        @message = forbidden(http_response)
       when 404
-        return Slimpay::Error.not_found
+        @message = not_found
       when 406
-        return Slimpay::Error.not_acceptable(http_response)
+        @message = not_acceptable(http_response)
       else
-        return http_response
+        @message = http_response
       end
     end
 
-    def self.bad_request(message)
-      { code: 400, message: "HTTP Bad Request. #{ slimpay_error(message) }" }
+    def bad_request(http_message)
+      { code: 400, message: "HTTP Bad Request. #{ slimpay_error(http_message) }" }
     end
 
-    def self.forbidden(message)
-      { code: 403, message: "HTTP Forbidden. #{ slimpay_error(message) }" }
+    def forbidden(http_message)
+      { code: 403, message: "HTTP Forbidden. #{ slimpay_error(http_message) }" }
     end
 
-    def self.not_found
+    def not_found
       { code: 404, message: 'URI not found.' }
     end
 
-    def self.not_acceptable(message)
-      { code: 406, message: "HTTP Not Acceptable. #{ slimpay_error(message) }" }
+    def not_acceptable(http_message)
+      { code: 406, message: "HTTP Not Acceptable. #{ slimpay_error(http_message) }" }
     end
 
     def slimpay_error(http_message)

@@ -6,25 +6,20 @@ module Slimpay
   #   >> slimpay = Slimpay::Base.new(client_id = '1234', client_secret = '987654321', creditor_reference = 'azerty')
   #   >> slimpay.api_methods
   #   =>
-  #     {"apps"=>"https://api-sandbox.slimpay.net/alps/v1/apps"}
-  #     {"bank_accounts"=>"https://api-sandbox.slimpay.net/alps/v1/bank-accounts"}
-  #     {"billing_addresses"=>"https://api-sandbox.slimpay.net/alps/v1/billing-addresses"}
-  #     {"binary_contents"=>"https://api-sandbox.slimpay.net/alps/v1/binary-contents"}
-  #     {"card_transactions"=>"https://api-sandbox.slimpay.net/alps/v1/card-transactions"}
-  #     {"card_transaction_issues"=>"https://api-sandbox.slimpay.net/alps/v1/card-transaction-issues"}
-  #     {"creditors"=>"https://api-sandbox.slimpay.net/alps/v1/creditors"}
-  #     {"direct_debits"=>"https://api-sandbox.slimpay.net/alps/v1/direct-debits"}
-  #     {"direct_debit_issues"=>"https://api-sandbox.slimpay.net/alps/v1/direct-debit-issues"}
-  #     {"documents"=>"https://api-sandbox.slimpay.net/alps/v1/documents"}
-  #     {"errors"=>"https://api-sandbox.slimpay.net/alps/v1/errors"}
-  #     {"mandates"=>"https://api-sandbox.slimpay.net/alps/v1/mandates"}
-  #     {"orders"=>"https://api-sandbox.slimpay.net/alps/v1/orders"}
-  #     {"order_items"=>"https://api-sandbox.slimpay.net/alps/v1/order-items"}
-  #     {"postal_addresses"=>"https://api-sandbox.slimpay.net/alps/v1/postal-addresses"}
-  #     {"recurrent_direct_debits"=>"https://api-sandbox.slimpay.net/alps/v1/recurrent-direct-debits"}
-  #     {"signatories"=>"https://api-sandbox.slimpay.net/alps/v1/signatories"}
-  #     {"subscribers"=>"https://api-sandbox.slimpay.net/alps/v1/subscribers"}
-  #     {"user_approvals"=>"https://api-sandbox.slimpay.net/alps/v1/user-approvals"}
+  #     { "post_token"=>"https://api-sandbox.slimpay.net/oauth/token",
+  #       "create_orders"=>"https://api-sandbox.slimpay.net/orders",
+  #       "get_creditors"=>"https://api-sandbox.slimpay.net/creditors{?reference}",
+  #       "get_orders"=>"https://api-sandbox.slimpay.net/orders{?creditorReference,reference}",
+  #       "get_mandates"=>"https://api-sandbox.slimpay.net/mandates{?creditorReference,rum}",
+  #       "create_documents"=>"https://api-sandbox.slimpay.net/documents",
+  #       "get_documents"=>"https://api-sandbox.slimpay.net/documents{?creditorReference,entityReference,reference}",
+  #       "create_direct_debits"=>"https://api-sandbox.slimpay.net/direct-debits",
+  #       "get_direct_debits"=>"https://api-sandbox.slimpay.net/direct-debits{?id}",
+  #       "create_recurrent_direct_debits"=>"https://api-sandbox.slimpay.net/recurrent-direct-debits",
+  #       "get_recurrent_direct_debits"=>"https://api-sandbox.slimpay.net/recurrent-direct-debits{?id}",
+  #       "get_card_transactions"=>"https://api-sandbox.slimpay.net/card-transactions{?id}",
+  #       "get_card_transaction_issues"=>"https://api-sandbox.slimpay.net/card-transaction-issues{?id}",
+  #       "profile"=>"https://api-sandbox.slimpay.net/alps/v1"}
   #
   # ===== Arguments
   #   client_id: (String)
@@ -37,8 +32,6 @@ module Slimpay
       @creditor_reference = creditor_reference || SANDBOX_CREDITOR
       @endpoint = sandbox? ? SANDBOX_ENDPOINT : PRODUCTION_ENDPOINT
       @token_endpoint = @endpoint + '/oauth/token'
-      @api_suffix = '/alps/v1/'
-      @resource_name = self.class.to_s.demodulize.downcase.pluralize
       oauth
       generate_api_methods
     end
@@ -47,7 +40,7 @@ module Slimpay
 
     # An empty request call to the endpoint lists resources.
     def request(url = '')
-      response = HTTParty.get("#{@endpoint}#{@api_suffix}#{url}")
+      response = HTTParty.get("#{@endpoint}/#{url}", headers: options)
       Slimpay.answer response
     end
 
@@ -61,15 +54,38 @@ module Slimpay
     # Root endpoint provides GET links to resources.
     # This methods create a method for each one.
     def generate_api_methods
-      response = request
-      res = JSON.parse(response)
-      res['descriptor'].each do |api_hash|
-        url = api_hash['href']
-        self.class.send(:define_method, api_hash['name'].underscore) do
+      response = JSON.parse(request)
+      methods = {}
+      response['_links'].each do |k, v|
+        next if k.eql?('self')
+        name = k.gsub('https://api.slimpay.net/alps#', '').underscore
+        url = v['href']
+        api_args = url.scan(/{\?(.*),?}/).flatten.first
+        methods[name] = generate_method(name, url, api_args)
+      end
+      list_api_methods(methods)
+    end
+
+    def generate_method(name, url, api_args)
+      self.class.send(:define_method, name) do |method_arguments|
+        if api_args.nil?
           HTTParty.get(url, headers: options)
+        else
+          clean_url = url.gsub(/{\?.*/, '')
+          url_args = format_html_arguments(api_args, method_arguments)
+          HTTParty.get("#{ clean_url }?#{ url_args }", headers: options)
         end
       end
-      list_api_methods(res)
+      url
+    end
+
+    def format_html_arguments(api_args, method_arguments)
+      url_args = ''
+      api_args.split(',').each_with_index do |arg, index|
+        url_args += "#{arg}=#{method_arguments[arg.to_sym]}"
+        url_args += '&' if (index + 1) < api_args.size
+      end
+      url_args
     end
 
     # Create the 'api_methods' instance method to retrieve an array of API methods previously created.
@@ -78,9 +94,10 @@ module Slimpay
     #   >> slim = Slimpay::Base.new
     #   >> slim.api_methods
     #   => [apps, creditors, direct_debits, mandates, orders, recurrent_direct_debits, subscribers, ...]
-    def list_api_methods(endpoint_results)
+    def list_api_methods(methods)
       self.class.send(:define_method, 'api_methods') do
-        return endpoint_results['descriptor'].map { |api_hash| { api_hash['name'].underscore => api_hash['href'] } }
+        return methods
+        # return endpoint_results['descriptor'].map { |api_hash| { api_hash['name'].underscore => api_hash['href'] } }
       end
     end
 

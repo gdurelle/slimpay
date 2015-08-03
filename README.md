@@ -28,19 +28,51 @@ Or install it yourself as:
 * client_secret = 'demosecret01'
 * creditor_reference : democreditor
 
-### Available resources :
-**Order**, **Mandate**, **App**
+### Root endpoint resources:
 
-Each resource defines its own methods according to the Slimpay API.
+```ruby
+slimpay = Slimpay::Base.new(client_id = '1234', client_secret = '987654321', creditor_reference = 'azerty')
+slimpay.api_methods
+```
+:warning: If you call ```Slimpay::Base.new``` without arguments, the _Sandbox_ credentials will be used.
+
+Result will be a Hash:
+
+```ruby
+{"post_token"=>"https://api-sandbox.slimpay.net/oauth/token",
+"create_orders"=>"https://api-sandbox.slimpay.net/orders",
+"get_creditors"=>"https://api-sandbox.slimpay.net/creditors{?reference}",
+"get_orders"=>"https://api-sandbox.slimpay.net/orders{?creditorReference,reference}",
+"get_mandates"=>"https://api-sandbox.slimpay.net/mandates{?creditorReference,rum}",
+"create_documents"=>"https://api-sandbox.slimpay.net/documents",
+"get_documents"=>"https://api-sandbox.slimpay.net/documents{?creditorReference,entityReference,reference}",
+"create_direct_debits"=>"https://api-sandbox.slimpay.net/direct-debits",
+"get_direct_debits"=>"https://api-sandbox.slimpay.net/direct-debits{?id}",
+"create_recurrent_direct_debits"=>"https://api-sandbox.slimpay.net/recurrent-direct-debits",
+"get_recurrent_direct_debits"=>"https://api-sandbox.slimpay.net/recurrent-direct-debits{?id}",
+"get_card_transactions"=>"https://api-sandbox.slimpay.net/card-transactions{?id}",
+"get_card_transaction_issues"=>"https://api-sandbox.slimpay.net/card-transaction-issues{?id}",
+"profile"=>"https://api-sandbox.slimpay.net/alps/v1"}
+```
+
+The key is the methods name you will call on the Slimpay class instance (here Base).
+The value is URL that will be used, with its arguments.
 
 **Example:**
 
-```zsh
-Slimpay::Order.new.api_methods
-=> ["get_order", "patch_order", "create_orders", "get_orders"]
+```ruby
+"get_orders"=>"https://api-sandbox.slimpay.net/orders{?creditorReference,reference}",
 ```
+The arguments will be _creditorReference_ and _reference_. You can give them as a Hash.
+See below for an example.
 
-Some methods as been added in this gem as shortcuts to these.
+Some methods as been added to this gem as shortcuts to these root methods.
+
+### Available resources :
+**Order**, **Mandate**, **App**
+
+Each resource inherit from _Resource_ wich itself inherits from _Base_.
+_Base_ defines root methods according to the Slimpay API.
 
 **Example:**
 
@@ -48,7 +80,7 @@ The official API method:
 
 ```ruby
 orders = Slimpay::Order.new(client_id = '1234', client_secret = '987654321', creditor_reference = 'azerty')
-orders.get_orders({creditorReference: @creditor_reference, reference: 1234})
+orders.get_orders({creditorReference: 'mysellername', reference: 1234})
 ```
 
 The shortcut:
@@ -58,23 +90,7 @@ orders = Slimpay::Order.new(client_id = '1234', client_secret = '987654321', cre
 orders.get_one(1234)
 ```
 
-### Root endpoint resources:
-
-```ruby
-slimpay = Slimpay::Base.new(client_id = '1234', client_secret = '987654321', creditor_reference = 'azerty')
-slimpay.api_methods
-```
-:warning: If you call ```Slimpay::Base.new``` without arguments, the _Sandbox_ credentials will be used.
-
-### Get a specific Order
-If your Order as a reference key = 1234
-
-```ruby
-orders = Slimpay::Order.new
-orders.get_one(1234)
-```
-
-result will be a Hash:
+Result will be a Hash:
 
 ```json
 {"_links"=>

@@ -1,0 +1,134 @@
+AllCops:
+  Exclude:
+    - 'bin/**/*'
+  RunRailsCops: false
+
+LineLength:
+  Max: 160
+  Severity: error
+
+MethodLength:
+  Max: 40
+  Severity: error
+
+AbcSize:
+  Max:  35
+
+PerceivedComplexity:
+  Max: 9
+
+TrailingBlankLines:
+  Severity: error
+
+EndOfLine:
+  Severity: error
+
+TrailingComma:
+  EnforcedStyleForMultiline: no_comma
+  Severity: error
+
+EmptyLines:
+  Severity: error
+
+### Disabled checks
+
+Documentation:
+  Enabled: false
+
+DotPosition:
+  Enabled: false
+
+StringLiterals:
+  Enabled: false
+
+NumericLiterals:
+  Enabled: false
+
+AccessModifierIndentation:
+  Enabled: false
+
+EmptyLinesAroundAccessModifier:
+  Enabled: false
+
+AssignmentInCondition:
+  Enabled: false
+
+WordArray:
+  Enabled: false
+
+RedundantBegin:
+  Enabled: false
+
+RaiseArgs:
+  Enabled: false
+
+HandleExceptions:
+  Enabled: false
+
+RedundantSelf:
+  Enabled: false
+
+SignalException:
+  Enabled: false
+
+PredicateName:
+  Enabled: false
+
+BlockComments:
+  Enabled: false
+
+UnusedBlockArgument:
+  Enabled: false
+
+PercentLiteralDelimiters:
+  Enabled: false
+
+### Following checks should be enabled once we decide on the style to use
+
+IfUnlessModifier:
+  Enabled: false
+
+AlignArray:
+  Enabled: false
+
+AlignHash:
+  Enabled: false
+
+AlignParameters:
+  Enabled: false
+
+SpaceBeforeBlockBraces:
+  Enabled: false
+
+SpaceInsideBlockBraces:
+  Enabled: false
+
+SpaceInsideHashLiteralBraces:
+  Enabled: false
+
+HashSyntax:
+  Enabled: false
+
+ParenthesesAroundCondition:
+  Enabled: false
+
+CollectionMethods:
+  Enabled: false
+
+AndOr:
+  Enabled: false
+
+RescueModifier:
+  Enabled: false
+
+ClassLength:
+  Enabled: false
+
+IndentationWidth:
+  Enabled: false
+
+EndAlignment:
+  Enabled: false
+
+CyclomaticComplexity:
+  Enabled: false

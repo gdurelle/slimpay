@@ -47,11 +47,11 @@ module Slimpay
     end
 
     def bad_request(http_message)
-      { code: 400, message: "HTTP Bad Request. #{ slimpay_error(http_message) }" }
+      { code: 400, message: "HTTP Bad Request. #{slimpay_error(http_message)}" }
     end
 
     def forbidden(http_message)
-      { code: 403, message: "HTTP Forbidden. #{ slimpay_error(http_message) }" }
+      { code: 403, message: "HTTP Forbidden. #{slimpay_error(http_message)}" }
     end
 
     def not_found
@@ -59,14 +59,14 @@ module Slimpay
     end
 
     def not_acceptable(http_message)
-      { code: 406, message: "HTTP Not Acceptable. #{ slimpay_error(http_message) }" }
+      { code: 406, message: "HTTP Not Acceptable. #{slimpay_error(http_message)}" }
     end
 
     def slimpay_error(http_message)
       slimpay_error = JSON.parse(http_message)
       slimpay_code = slimpay_error['code']
       slimpay_message = slimpay_error['message']
-      "Slimpay #{ slimpay_code } : #{ slimpay_message }"
+      "Slimpay #{slimpay_code} : #{slimpay_message}"
     end
   end
 end

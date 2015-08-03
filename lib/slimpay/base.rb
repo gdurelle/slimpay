@@ -73,7 +73,7 @@ module Slimpay
         else
           clean_url = url.gsub(/{\?.*/, '')
           url_args = format_html_arguments(api_args, method_arguments)
-          HTTParty.get("#{ clean_url }?#{ url_args }", headers: options)
+          HTTParty.get("#{clean_url}?#{url_args}", headers: options)
         end
       end
       url
@@ -104,7 +104,7 @@ module Slimpay
     def options
       {
         'Accept' => API_HEADER,
-        'Authorization' => "Bearer #{ @token }",
+        'Authorization' => "Bearer #{@token}",
         'grant_type' => 'client_credentials',
         'scope' => 'api'
       }

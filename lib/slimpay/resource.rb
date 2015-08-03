@@ -11,11 +11,12 @@ module Slimpay
     # Shortcut method to get a resource with only resource's reference.
     #
     # The above example shall return the same result as
-    #   get_mandates({creditorReference: @creditor_reference, reference: 1})
+    #   mandates = Slimpay::Mandate.new
+    #   mandates.get_mandates({creditorReference: @creditor_reference, reference: 1})
     #
     # ===== Example:
     #   >> mandates = Slimpay::Mandate.new
-    #   >> mandates.get_one
+    #   >> mandates.get_one(1)
     # ===== Arguments:
     #   reference: (String)
     def get_one(reference = 1)

@@ -3,8 +3,8 @@ module Slimpay
   #
   # Connect to the HAPI through OAuth2 and generates HAPI's first resources GET methods.
   # ===== Usage:
-  #   >> slimpay = Slimpay::Base.new(client_id = '1234', client_secret = '987654321', creditor_reference = 'azerty')
-  #   >> slimpay.api_methods
+  #   slimpay = Slimpay::Base.new(client_id = '1234', client_secret = '987654321', creditor_reference = 'azerty')
+  #   slimpay.api_methods
   #   =>
   #     { "post_token"=>"https://api-sandbox.slimpay.net/oauth/token",
   #       "create_orders"=>"https://api-sandbox.slimpay.net/orders",
@@ -91,8 +91,8 @@ module Slimpay
     # Create the 'api_methods' instance method to retrieve an array of API methods previously created.
     #
     # ===== Usage:
-    #   >> slim = Slimpay::Base.new
-    #   >> slim.api_methods
+    #   slim = Slimpay::Base.new
+    #   slim.api_methods
     #   => [apps, creditors, direct_debits, mandates, orders, recurrent_direct_debits, subscribers, ...]
     def list_api_methods(methods)
       self.class.send(:define_method, 'api_methods') do

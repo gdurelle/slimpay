@@ -15,8 +15,8 @@ module Slimpay
     #   mandates.get_mandates({creditorReference: @creditor_reference, reference: 1})
     #
     # ===== Example:
-    #   >> mandates = Slimpay::Mandate.new
-    #   >> mandates.get_one(1)
+    #   mandates = Slimpay::Mandate.new
+    #   mandates.get_one(1)
     # ===== Arguments:
     #   reference: (String)
     def get_one(reference = 1)

@@ -6,8 +6,8 @@ module Slimpay
     # Override the Resource#get_one method because the url is not the same for Orders
     #
     # ===== Example:
-    #   >> orders = Slimpay::Order.new
-    #   >> orders.get_one
+    #   orders = Slimpay::Order.new
+    #   orders.get_one
     #   =>
     #     {"_links"=>
     #       {"self"=>{"href"=>"https://api-sandbox.slimpay.net/creditors/democreditor/orders/1"},

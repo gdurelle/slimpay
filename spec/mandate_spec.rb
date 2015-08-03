@@ -1,13 +1,8 @@
 require 'spec_helper'
 
 describe Slimpay::Mandate do
-  it 'calls for OAuth2 connection' do
+  it 'calls for OAuth2 connection and generate API methods' do
     expect_any_instance_of(Slimpay::Resource).to receive(:oauth)
-    Slimpay::Mandate.new
-  end
-
-  it 'generate API methods' do
-    allow_any_instance_of(Slimpay::Mandate).to receive(:oauth)
     expect_any_instance_of(Slimpay::Mandate).to receive(:generate_api_methods)
     Slimpay::Mandate.new
   end

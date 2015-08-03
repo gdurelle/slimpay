@@ -33,7 +33,24 @@ module Slimpay
       @endpoint = sandbox? ? SANDBOX_ENDPOINT : PRODUCTION_ENDPOINT
       @token_endpoint = @endpoint + '/oauth/token'
       oauth
-      generate_api_methods
+      response = JSON.parse(request)
+      generate_api_methods(response)
+    end
+
+    # Root endpoint provides GET links to resources.
+    # This methods create a method for each one.
+    # It will also create new methods from future answers.
+    def generate_api_methods(response)
+      methods = {}
+      response['_links'].each do |k, v|
+        next if k.eql?('self')
+        name = k.gsub('https://api.slimpay.net/alps#', '').underscore
+        next if @methods.present? && @methods.keys.include?(name)
+        url = v['href']
+        api_args = url.scan(/{\?(.*),?}/).flatten.first
+        methods[name] = generate_method(name, url, api_args)
+      end
+      list_api_methods(methods)
     end
 
     private
@@ -51,23 +68,8 @@ module Slimpay
       @token = response.token
     end
 
-    # Root endpoint provides GET links to resources.
-    # This methods create a method for each one.
-    def generate_api_methods
-      response = JSON.parse(request)
-      methods = {}
-      response['_links'].each do |k, v|
-        next if k.eql?('self')
-        name = k.gsub('https://api.slimpay.net/alps#', '').underscore
-        url = v['href']
-        api_args = url.scan(/{\?(.*),?}/).flatten.first
-        methods[name] = generate_method(name, url, api_args)
-      end
-      list_api_methods(methods)
-    end
-
     def generate_method(name, url, api_args)
-      self.class.send(:define_method, name) do |method_arguments|
+      self.class.send(:define_method, name) do |method_arguments = nil|
         if api_args.nil?
           HTTParty.get(url, headers: options)
         else
@@ -95,9 +97,13 @@ module Slimpay
     #   slim.api_methods
     #   => [apps, creditors, direct_debits, mandates, orders, recurrent_direct_debits, subscribers, ...]
     def list_api_methods(methods)
+      @methods ||= methods
       self.class.send(:define_method, 'api_methods') do
-        return methods
-        # return endpoint_results['descriptor'].map { |api_hash| { api_hash['name'].underscore => api_hash['href'] } }
+        if @methods != methods
+          @methods.merge(methods)
+        else
+          methods
+        end
       end
     end
 
@@ -105,6 +111,7 @@ module Slimpay
       {
         'Accept' => API_HEADER,
         'Authorization' => "Bearer #{@token}",
+        'Content-type' => 'application/hal+json',
         'grant_type' => 'client_credentials',
         'scope' => 'api'
       }

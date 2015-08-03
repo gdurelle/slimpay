@@ -21,8 +21,9 @@ module Slimpay
       if defined?(http_response.code)
         display_http_error(http_response)
       else
-        @message = http_response
+        @message = JSON.parse(http_response)
       end
+      @message
     end
 
     def to_s
@@ -35,6 +36,8 @@ module Slimpay
       case http_response.code
       when 400
         @message = bad_request(http_response)
+      when 401
+        @message = unauthorized(http_response)
       when 403
         @message = forbidden(http_response)
       when 404
@@ -48,6 +51,10 @@ module Slimpay
 
     def bad_request(http_message)
       { code: 400, message: "HTTP Bad Request. #{slimpay_error(http_message)}" }
+    end
+
+    def unauthorized(http_message)
+      { code: 401, message: "HTTP Unauthorized. #{slimpay_error(http_message)}"}
     end
 
     def forbidden(http_message)

@@ -45,12 +45,13 @@ module Slimpay
         }],
         started: true
       }
-      HTTParty.post("#{@endpoint}#{url}", body: body_options, headers: options)
+      HTTParty.post("#{@endpoint}/#{url}", body: body_options.to_json, headers: options)
     end
 
     # POST
-    def sign_mandate(reference = 'subscriber01')
+    def sign_mandate(reference = 'subscriber01', bic = nil, iban = nil)
       url = 'orders'
+      sepa = { bic: bic, iban: iban }
       body_options = {
         creditor: {
           reference: @creditor_reference
@@ -61,6 +62,7 @@ module Slimpay
         items: [{
           type: 'signMandate',
           mandate: {
+            standard: 'SEPA',
             signatory: {
               honorificPrefix: 'Mr',
               familyName: 'Doe',
@@ -79,7 +81,9 @@ module Slimpay
         }],
         started: true
       }
-      HTTParty.post("#{@endpoint}#{url}", body: body_options, headers: options)
+      body_options[:items].first[:mandate][:signatory][:bankAccount] = sepa if bic.present? && iban.present?
+      response = HTTParty.post("#{@endpoint}/#{url}", { body: body_options.to_json, headers: options })
+      Slimpay.answer(response)
     end
   end
 end

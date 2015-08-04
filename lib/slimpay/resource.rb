@@ -3,7 +3,7 @@ module Slimpay
   #
   # Defines HAPI resource non-semantic methods.
   class Resource < Base
-    def initialize(client_id = nil, client_secret = nil, creditor_reference = nil)
+    def initialize(client_id = nil, client_secret = nil, creditor_reference = nil, sandbox = true)
       @resource_name = self.class.to_s.demodulize.downcase.pluralize
       super(client_id, client_secret, creditor_reference)
     end

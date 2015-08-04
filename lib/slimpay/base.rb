@@ -26,10 +26,11 @@ module Slimpay
   #   client_secret: (String)
   #   creditor_reference: (String)
   class Base
-    def initialize(client_id = nil, client_secret = nil, creditor_reference = nil)
+    def initialize(client_id = nil, client_secret = nil, creditor_reference = nil, sandbox = true)
       @client_id = client_id || SANDBOX_CLIENT_ID
       @client_secret = client_secret || SANDBOX_SECRET_ID
       @creditor_reference = creditor_reference || SANDBOX_CREDITOR
+      @sandbox = sandbox
       @endpoint = sandbox? ? SANDBOX_ENDPOINT : PRODUCTION_ENDPOINT
       @token_endpoint = @endpoint + '/oauth/token'
       oauth
@@ -45,7 +46,7 @@ module Slimpay
       response['_links'].each do |k, v|
         next if k.eql?('self')
         name = k.gsub('https://api.slimpay.net/alps#', '').underscore
-        next if @methods.present? && @methods.keys.include?(name)
+        next if @methods.nil? || @methods.keys.include?(name)
         url = v['href']
         api_args = url.scan(/{\?(.*),?}/).flatten.first
         methods[name] = generate_method(name, url, api_args)
@@ -118,7 +119,7 @@ module Slimpay
     end
 
     def sandbox?
-      @client_id.eql?('democreditor01') ? true : false
+      @sandbox || @client_id.eql?('democreditor01') ? true : false
     end
   end
 end

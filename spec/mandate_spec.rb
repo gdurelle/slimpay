@@ -1,20 +1,18 @@
 require 'spec_helper'
 
 describe Slimpay::Mandate do
-  include_examples 'Expect OAuth and first requests', Slimpay::Base
+  include_examples 'Expect OAuth and first requests', Slimpay::Mandate
+
+  subject { Slimpay::Mandate }
 
   it 'is a Resource child' do
-    allow_any_instance_of(Slimpay::Mandate).to receive(:oauth)
-    allow_any_instance_of(Slimpay::Base).to receive(:request) { { plop: 'lorem' }.to_json }
-    allow_any_instance_of(Slimpay::Mandate).to receive(:generate_api_methods)
-    expect(Slimpay::Mandate.new).to be_a Slimpay::Resource
-    expect(Slimpay::Mandate.new).to be_an_instance_of Slimpay::Mandate
+    allow_oauth_and_first_requests(Slimpay::Mandate)
+    expect(subject.new).to be_a Slimpay::Resource
+    expect(subject.new).to be_an_instance_of Slimpay::Mandate
   end
 
   it 'has a get_one method' do
-    allow_any_instance_of(Slimpay::Mandate).to receive(:oauth)
-    allow_any_instance_of(Slimpay::Base).to receive(:request) { { plop: 'lorem' }.to_json }
-    allow_any_instance_of(Slimpay::Mandate).to receive(:generate_api_methods)
-    expect(Slimpay::Mandate.new).to respond_to :get_one
+    allow_oauth_and_first_requests(Slimpay::Mandate)
+    expect(subject.new).to respond_to :get_one
   end
 end

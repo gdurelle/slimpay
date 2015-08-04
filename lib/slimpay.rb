@@ -4,6 +4,7 @@ require 'httparty'
 
 require 'active_support/core_ext/string/inflections'
 
+require 'slimpay/configuration'
 require 'slimpay/error'
 require 'slimpay/base'
 require 'slimpay/resource'
@@ -22,6 +23,23 @@ module Slimpay
   SANDBOX_CLIENT_ID = 'democreditor01'
   SANDBOX_SECRET_ID = 'demosecret01'
   SANDBOX_CREDITOR = 'democreditor'
+
+  class << self
+    attr_accessor :configuration
+  end
+
+  # Sets the initial configuration for client_id, client_secret and creditor_reference
+  # ===== Usage:
+  #   Slimpay.configure do |config|
+  #     config.client_id = "your_client_id"
+  #     config.client_secret = "your_client_secret"
+  #     config.creditor_reference = "your_creditor_reference"
+  #     config.sandbox = true
+  #   end
+  def self.configure
+    self.configuration ||= Configuration.new
+    yield(configuration)
+  end
 
   # Used to display HTTP requests responses nicely in case of error.
   #

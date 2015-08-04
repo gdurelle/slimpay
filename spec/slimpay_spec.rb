@@ -28,13 +28,9 @@ describe Slimpay do
     end
 
     it 'initializes the variables according the config' do
-      expect_any_instance_of(Slimpay::Base).to receive(:oauth)
-      expect_any_instance_of(Slimpay::Base).to receive(:request) { { plop: 'lorem' }.to_json }
-      expect_any_instance_of(Slimpay::Base).to receive(:generate_api_methods)
-      slim = Slimpay::Base.new
-      expect(slim.client_id).to eq('testcreditor01')
-      expect(slim.client_secret).to eq('testsecret01')
-      expect(slim.creditor_reference).to eq('testcreditor')
+      expect(Slimpay.configuration.client_id).to eq('testcreditor01')
+      expect(Slimpay.configuration.client_secret).to eq('testsecret01')
+      expect(Slimpay.configuration.creditor_reference).to eq('testcreditor')
     end
   end
 end

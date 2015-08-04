@@ -26,16 +26,16 @@ module Slimpay
   #   client_secret: (String)
   #   creditor_reference: (String)
   class Base
-    def initialize(client_id = nil, client_secret = nil, creditor_reference = nil, sandbox = true)
-      @client_id = client_id || SANDBOX_CLIENT_ID
-      @client_secret = client_secret || SANDBOX_SECRET_ID
-      @creditor_reference = creditor_reference || SANDBOX_CREDITOR
-      @sandbox = sandbox
-      @endpoint = sandbox? ? SANDBOX_ENDPOINT : PRODUCTION_ENDPOINT
-      @token_endpoint = @endpoint + '/oauth/token'
-      oauth
-      response = JSON.parse(request)
-      generate_api_methods(response)
+    def initialize(client_id = nil, client_secret = nil, creditor_reference = nil, sandbox = nil)
+      Slimpay.configuration ||= Configuration.new
+      @client_id = client_id || Slimpay.configuration.client_id
+      @client_secret = client_secret || Slimpay.configuration.client_secret
+      @creditor_reference = creditor_reference || Slimpay.configuration.creditor_reference
+      @sandbox = sandbox || Slimpay.configuration.sandbox
+      init_endpoint
+      connect_api_with_oauth
+      api_response = JSON.parse(request_to_api)
+      generate_api_methods(api_response)
     end
 
     # Root endpoint provides GET links to resources.
@@ -56,14 +56,19 @@ module Slimpay
 
     private
 
+    def init_endpoint
+      @endpoint = sandbox? ? SANDBOX_ENDPOINT : PRODUCTION_ENDPOINT
+      @token_endpoint = @endpoint + '/oauth/token'
+    end
+
     # An empty request call to the endpoint lists resources.
-    def request(url = '')
+    def request_to_api(url = '')
       response = HTTParty.get("#{@endpoint}/#{url}", headers: options)
       Slimpay.answer response
     end
 
     # OAuth2 call to retrieve the token
-    def oauth
+    def connect_api_with_oauth
       client = OAuth2::Client.new(@client_id, @client_secret, site: @token_endpoint, headers: options)
       response = client.client_credentials.get_token
       @token = response.token

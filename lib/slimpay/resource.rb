@@ -5,7 +5,7 @@ module Slimpay
   class Resource < Base
     def initialize(client_id = nil, client_secret = nil, creditor_reference = nil, sandbox = true)
       @resource_name = self.class.to_s.demodulize.downcase.pluralize
-      super(client_id, client_secret, creditor_reference)
+      super(client_id, client_secret, creditor_reference, sandbox)
     end
 
     # Shortcut method to get a resource with only resource's reference.

@@ -46,7 +46,7 @@ module Slimpay
       response['_links'].each do |k, v|
         next if k.eql?('self')
         name = k.gsub('https://api.slimpay.net/alps#', '').underscore
-        next if @methods.nil? || @methods.keys.include?(name)
+        next if @methods && @methods.keys.include?(name)
         url = v['href']
         api_args = url.scan(/{\?(.*),?}/).flatten.first
         methods[name] = generate_method(name, url, api_args)
@@ -75,16 +75,49 @@ module Slimpay
     end
 
     def generate_method(name, url, api_args)
+      if name.start_with?('create', 'post')
+        generate_post_method(name, url)
+      elsif name.start_with?('patch')
+        generate_patch_method(name, url)
+      else
+        generate_get_method(name, url, api_args)
+      end
+      url
+    end
+
+    def generate_get_method(name, url, api_args)
       self.class.send(:define_method, name) do |method_arguments = nil|
         if api_args.nil?
-          HTTParty.get(url, headers: options)
+          response = HTTParty.get(url, headers: options)
+          generate_api_methods(JSON.parse(response))
+          Slimpay.answer(response)
         else
           clean_url = url.gsub(/{\?.*/, '')
           url_args = format_html_arguments(api_args, method_arguments)
-          HTTParty.get("#{clean_url}?#{url_args}", headers: options)
+          response = HTTParty.get("#{clean_url}?#{url_args}", headers: options)
+          answer = Slimpay.answer(response)
+          generate_api_methods(JSON.parse(response))
+          answer
         end
       end
-      url
+    end
+
+    def generate_post_method(name, url)
+      self.class.send(:define_method, name) do |method_arguments = nil|
+        response = HTTParty.post(url, body: method_arguments.to_json, headers: options)
+        answer = Slimpay.answer(response)
+        generate_api_methods(JSON.parse(response))
+        answer
+      end
+    end
+
+    def generate_patch_method(name, url)
+      self.class.send(:define_method, name) do |method_arguments = nil|
+        response = HTTParty.patch(url, body: method_arguments.to_json, headers: options)
+        answer = Slimpay.answer(response)
+        generate_api_methods(JSON.parse(response))
+        answer
+      end
     end
 
     def format_html_arguments(api_args, method_arguments)
@@ -105,11 +138,8 @@ module Slimpay
     def list_api_methods(methods)
       @methods ||= methods
       self.class.send(:define_method, 'api_methods') do
-        if @methods != methods
-          @methods.merge(methods)
-        else
-          methods
-        end
+        @methods = @methods.merge(methods) if @methods != methods
+        @methods
       end
     end
 

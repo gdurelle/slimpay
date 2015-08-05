@@ -27,7 +27,9 @@ module Slimpay
     #   reference: (String)
     def get_one(reference = 1)
       query_options = "creditorReference=#{@creditor_reference}&reference=#{reference}"
-      Slimpay.answer(HTTParty.get("#{@endpoint}/#{@resource_name}?#{query_options}", headers: options))
+      response = HTTParty.get("#{@endpoint}/#{@resource_name}?#{query_options}", headers: options)
+      generate_api_methods(JSON.parse(response))
+      Slimpay.answer(response)
     end
 
     # POST
@@ -81,7 +83,7 @@ module Slimpay
         }],
         started: true
       }
-      body_options[:items].first[:mandate][:signatory][:bankAccount] = sepa if bic.present? && iban.present?
+      body_options[:items].first[:mandate][:signatory][:bankAccount] = sepa unless bic.nil? || iban.nil?
       response = HTTParty.post("#{@endpoint}/#{url}", body: body_options.to_json, headers: options)
       generate_api_methods(JSON.parse(response))
       Slimpay.answer(response)

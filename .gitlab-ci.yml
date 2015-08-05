@@ -1,0 +1,10 @@
+before_script:
+  - gem install bundler -v 1.10.4
+  - bundle install
+
+rspec:
+  script: "rake spec"
+  tags:
+    - ruby
+  only:
+    - branches

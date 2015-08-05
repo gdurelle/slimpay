@@ -1,3 +1,5 @@
+![build status](http://app-gitci-vm01.acticall.net/projects/1/status.png?ref=master)
+
 # Slimpay
 
 Ruby implementation of the Slimpay Hypermedia API.

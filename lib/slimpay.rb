@@ -48,9 +48,7 @@ module Slimpay
   def self.answer(http_response)
     return Slimpay::Error.empty if http_response.nil?
     if http_response.code >= 400
-      error = Slimpay::Error.new(http_response)
-      $stdout.puts error.message
-      fail error, error.message
+      Slimpay::Error.new(http_response)
     else
       http_response
     end

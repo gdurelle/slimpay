@@ -30,6 +30,13 @@ Or install it yourself as:
 * client_secret = 'demosecret01'
 * creditor_reference : democreditor
 
+### Test
+
+IBAN : FR1420041010050500013M02606
+BIC : PSSTFRPP
+Bank : La banque Postale
+Country: France
+
 ### Root endpoint resources:
 
 ```ruby

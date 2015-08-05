@@ -23,7 +23,8 @@ module Slimpay
       else
         @message = JSON.parse(http_response)
       end
-      @message
+      $stdout.puts @message
+      fail self, @message
     end
 
     def to_s

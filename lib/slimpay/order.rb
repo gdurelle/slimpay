@@ -28,8 +28,7 @@ module Slimpay
     def get_one(reference = 1)
       query_options = "creditorReference=#{@creditor_reference}&reference=#{reference}"
       response = HTTParty.get("#{@endpoint}/#{@resource_name}?#{query_options}", headers: options)
-      generate_api_methods(JSON.parse(response))
-      Slimpay.answer(response)
+      follow_up_api(response)
     end
 
     # POST
@@ -47,7 +46,8 @@ module Slimpay
         }],
         started: true
       }
-      HTTParty.post("#{@endpoint}/#{url}", body: body_options.to_json, headers: options)
+      response = HTTParty.post("#{@endpoint}/#{url}", body: body_options.to_json, headers: options)
+      follow_up_api(response)
     end
 
     # POST
@@ -85,8 +85,7 @@ module Slimpay
       }
       body_options[:items].first[:mandate][:signatory][:bankAccount] = sepa unless bic.nil? || iban.nil?
       response = HTTParty.post("#{@endpoint}/#{url}", body: body_options.to_json, headers: options)
-      generate_api_methods(JSON.parse(response))
-      Slimpay.answer(response)
+      follow_up_api(response)
     end
   end
 end

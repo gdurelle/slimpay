@@ -43,8 +43,9 @@ module Slimpay
     # It will also create new methods from future answers.
     def generate_api_methods(response)
       methods = {}
-      response['_links'].each do |k, v|
-        next if k.eql?('self')
+      links = response['_links']
+      links.each do |k, v|
+        next if k.eql?('_embedded')
         name = k.gsub('https://api.slimpay.net/alps#', '').underscore
         next if @methods && @methods.keys.include?(name)
         url = v['href']
@@ -89,15 +90,12 @@ module Slimpay
       self.class.send(:define_method, name) do |method_arguments = nil|
         if api_args.nil?
           response = HTTParty.get(url, headers: options)
-          generate_api_methods(JSON.parse(response))
-          Slimpay.answer(response)
+          follow_up_api(response)
         else
           clean_url = url.gsub(/{\?.*/, '')
           url_args = format_html_arguments(api_args, method_arguments)
           response = HTTParty.get("#{clean_url}?#{url_args}", headers: options)
-          answer = Slimpay.answer(response)
-          generate_api_methods(JSON.parse(response))
-          answer
+          follow_up_api(response)
         end
       end
     end
@@ -105,18 +103,14 @@ module Slimpay
     def generate_post_method(name, url)
       self.class.send(:define_method, name) do |method_arguments = nil|
         response = HTTParty.post(url, body: method_arguments.to_json, headers: options)
-        answer = Slimpay.answer(response)
-        generate_api_methods(JSON.parse(response))
-        answer
+        follow_up_api(response)
       end
     end
 
     def generate_patch_method(name, url)
       self.class.send(:define_method, name) do |method_arguments = nil|
         response = HTTParty.patch(url, body: method_arguments.to_json, headers: options)
-        answer = Slimpay.answer(response)
-        generate_api_methods(JSON.parse(response))
-        answer
+        follow_up_api(response)
       end
     end
 
@@ -141,6 +135,12 @@ module Slimpay
         @methods = @methods.merge(methods) if @methods != methods
         @methods
       end
+    end
+
+    def follow_up_api(response)
+      answer = Slimpay.answer(response)
+      generate_api_methods(JSON.parse(response))
+      answer
     end
 
     def options

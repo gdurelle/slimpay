@@ -20,24 +20,31 @@ Or install it yourself as:
 
     $ gem install slimpay
 
+
 ## Usage
 
 **API Docs: https://api-sandbox.slimpay.net/docs/**
 
-**SANDBOX CREDENTIALS :**
+### Configuration
 
-* client_id =  'democreditor01'
-* client_secret = 'demosecret01'
-* creditor_reference : democreditor
+If you use _Rails_ place this code in _config/initializers/slimpay.rb_:
 
-### Test
+```ruby
+Slimpay.configure do |config|
+  config.client_id = "your_client_id"
+  config.client_secret = "your_client_secret"
+  config.creditor_reference = "your_creditor_reference"
+  config.sandbox = true
+end
+```
 
-IBAN : FR1420041010050500013M02606
-BIC : PSSTFRPP
-Bank : La banque Postale
-Country: France
+### The root endpoint:
 
-### Root endpoint resources:
+The Slimpay API uses self-discovery. It means that each time you will perform a request, the answer will be a Hash of links to follow in order to perform more requestq.
+
+The more you do requests, the more methods will appear.
+
+When you emplement any class, it will inherits from the root-endpoint and thus already have available methods.
 
 ```ruby
 slimpay = Slimpay::Base.new(client_id = '1234', client_secret = '987654321', creditor_reference = 'azerty')
@@ -48,7 +55,8 @@ slimpay.api_methods
 Result will be a Hash:
 
 ```ruby
-{"post_token"=>"https://api-sandbox.slimpay.net/oauth/token",
+{"self"=>"https://api-sandbox.slimpay.net/"
+"post_token"=>"https://api-sandbox.slimpay.net/oauth/token",
 "create_orders"=>"https://api-sandbox.slimpay.net/orders",
 "get_creditors"=>"https://api-sandbox.slimpay.net/creditors{?reference}",
 "get_orders"=>"https://api-sandbox.slimpay.net/orders{?creditorReference,reference}",
@@ -64,14 +72,15 @@ Result will be a Hash:
 "profile"=>"https://api-sandbox.slimpay.net/alps/v1"}
 ```
 
-The key is the methods name you will call on the Slimpay class instance (here Base).
-The value is URL that will be used, with its arguments.
+The keys of this Hash are the methods name you can call on the class instance (here Slimpay::Base).
+The value is the URL that will be used, with its arguments.
 
 **Example:**
 
 ```ruby
 "get_orders"=>"https://api-sandbox.slimpay.net/orders{?creditorReference,reference}",
 ```
+
 The arguments will be _creditorReference_ and _reference_. You can give them as a Hash.
 See below for an example.
 
@@ -115,6 +124,27 @@ Result will be a Hash:
  "dateCreated"=>"2014-12-12T09:35:39.000+0000",
  "mandateReused"=>false}
 ```
+
+Now you can call new methods : get_creditor, get_subscriber, user_approval, get_order_items, get_mandate
+
+**NB:** Note that the methods in the resulting Hash are dashed-named, but the generated methods are camelcased.
+
+## Credentials
+The sanbox let you test credentials connection and few methods.
+
+You will need a test environment setted up by Slimpay to go further.
+
+### SANDBOX
+
+* client_id =  'democreditor01'
+* client_secret = 'demosecret01'
+* creditor_reference : democreditor
+
+### Test
+
+* IBAN : FR1420041010050500013M02606
+* BIC : PSSTFRPP
+* Code for phone verification : 0000
 
 ## Development
 

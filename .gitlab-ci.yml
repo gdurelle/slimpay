@@ -3,7 +3,9 @@ before_script:
   - bundle install
 
 rspec:
-  script: "rake spec"
+  script:
+    - -rake spec
+    - 'rubocop --config .rubocop.yml --force-exclusion'
   tags:
     - ruby
   only:

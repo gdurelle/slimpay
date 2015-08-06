@@ -51,6 +51,12 @@ module Slimpay
     end
 
     # POST
+    # This will send a create_order request with
+    # ===== Arguments
+    #   reference: (String) The reference to your User in your application. Use a unique key.
+    #   Slimpay will refer to it for future answers.
+    # ===== Returns
+    #   The url to the SEPA mandate approval page.
     def sign_mandate(reference = 'subscriber01', bic = nil, iban = nil)
       url = 'orders'
       sepa = { bic: bic, iban: iban }
@@ -86,6 +92,7 @@ module Slimpay
       body_options[:items].first[:mandate][:signatory][:bankAccount] = sepa unless bic.nil? || iban.nil?
       response = HTTParty.post("#{@endpoint}/#{url}", body: body_options.to_json, headers: options)
       follow_up_api(response)
+      api_methods['user_approval']
     end
   end
 end

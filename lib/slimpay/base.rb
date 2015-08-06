@@ -39,15 +39,15 @@ module Slimpay
     end
 
     # Root endpoint provides GET links to resources.
-    # This methods create a method for each one.
+    # This methods create a method for each resources.
     # It will also create new methods from future answers.
     def generate_api_methods(response)
       methods = {}
       links = response['_links']
+      links = links.merge(response['_embedded']['items'].first['_links']) if response['_embedded'] && response['_embedded']['items']
       links.each do |k, v|
-        next if k.eql?('_embedded')
         name = k.gsub('https://api.slimpay.net/alps#', '').underscore
-        next if @methods && @methods.keys.include?(name)
+        next if @methods && @methods.keys.include?(name) && !k.eql?('self')
         url = v['href']
         api_args = url.scan(/{\?(.*),?}/).flatten.first
         methods[name] = generate_method(name, url, api_args)

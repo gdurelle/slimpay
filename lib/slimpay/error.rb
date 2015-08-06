@@ -24,6 +24,7 @@ module Slimpay
         @message = JSON.parse(http_response)
       end
       $stdout.puts @message
+      $stdout.puts http_response
       fail self, @message
     end
 

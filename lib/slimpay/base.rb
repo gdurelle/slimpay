@@ -149,7 +149,7 @@ module Slimpay
         'Authorization' => "Bearer #{@token}",
         'Content-type' => 'application/hal+json',
         'grant_type' => 'client_credentials',
-        'scope' => 'api'
+        'scope' => 'api_admin'
       }
     end
 

@@ -91,8 +91,7 @@ module Slimpay
       }
       body_options[:items].first[:mandate][:signatory][:bankAccount] = sepa unless bic.nil? || iban.nil?
       response = HTTParty.post("#{@endpoint}/#{url}", body: body_options.to_json, headers: options)
-      follow_up_api(response)
-      api_methods['user_approval']
+      JSON.parse(follow_up_api(response))
     end
   end
 end

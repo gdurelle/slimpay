@@ -57,9 +57,10 @@ module Slimpay
     #   Slimpay will refer to it for future answers.
     # ===== Returns
     #   The url to the SEPA mandate approval page.
-    def sign_mandate(reference = 'subscriber01', bic = nil, iban = nil)
+    def sign_mandate(reference = 'subscriber01', signatory = default_signatory)
       url = 'orders'
       sepa = { bic: bic, iban: iban }
+      # TODO: set user infos by hand.
       body_options = {
         creditor: {
           reference: @creditor_reference
@@ -71,27 +72,32 @@ module Slimpay
           type: 'signMandate',
           mandate: {
             standard: 'SEPA',
-            signatory: {
-              honorificPrefix: 'Mr',
-              familyName: 'Doe',
-              givenName: 'John',
-              telephone: '+33612345678',
-              email: 'john.doe@gmail.com',
-              billingAddress: {
-                street1: '27 rue des fleurs',
-                street2: 'Bat 2',
-                postalCode: '75008',
-                city: 'Paris',
-                country: 'FR'
-              }
-            }
+            signatory: signatory
           }
         }],
         started: true
       }
-      body_options[:items].first[:mandate][:signatory][:bankAccount] = sepa unless bic.nil? || iban.nil?
       response = HTTParty.post("#{@endpoint}/#{url}", body: body_options.to_json, headers: options)
       JSON.parse(follow_up_api(response))
+    end
+
+    private
+
+    def default_signatory
+      {
+        honorificPrefix: 'Mr',
+        familyName: 'Doe',
+        givenName: 'John',
+        telephone: '+33612345678',
+        email: 'john.doe@gmail.com',
+        billingAddress: {
+          street1: '27 rue des fleurs',
+          street2: 'Bat 2',
+          postalCode: '75008',
+          city: 'Paris',
+          country: 'FR'
+        }
+      }
     end
   end
 end

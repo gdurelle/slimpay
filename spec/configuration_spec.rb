@@ -16,5 +16,12 @@ module Slimpay
         expect(subject.client_id).to eq('testconfigidaccessor')
       end
     end
+
+    describe 'username=' do
+      it 'can set value' do
+        subject.username = 'admin@test.com'
+        expect(subject.username).to eq('admin@test.com')
+      end
+    end
   end
 end

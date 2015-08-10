@@ -6,6 +6,8 @@ module Slimpay
     attr_accessor :sandbox
     attr_accessor :return_url
     attr_accessor :notify_url
+    attr_accessor :username
+    attr_accessor :password
 
     def initialize
       @client_id = Slimpay::SANDBOX_CLIENT_ID

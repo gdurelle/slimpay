@@ -24,6 +24,10 @@ describe Slimpay do
         config.client_id = 'testcreditor01'
         config.client_secret = 'testsecret01'
         config.creditor_reference = 'testcreditor'
+        config.return_url = 'localhost:3000'
+        config.notify_url = 'localhost:3000'
+        config.username = 'admin@test.com'
+        config.password = '123456'
       end
     end
 
@@ -31,6 +35,10 @@ describe Slimpay do
       expect(Slimpay.configuration.client_id).to eq('testcreditor01')
       expect(Slimpay.configuration.client_secret).to eq('testsecret01')
       expect(Slimpay.configuration.creditor_reference).to eq('testcreditor')
+      expect(Slimpay.configuration.return_url).to eq('localhost:3000')
+      expect(Slimpay.configuration.notify_url).to eq('localhost:3000')
+      expect(Slimpay.configuration.username).to eq('admin@test.com')
+      expect(Slimpay.configuration.password).to eq('123456')
     end
   end
 end

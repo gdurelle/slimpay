@@ -35,6 +35,8 @@ module Slimpay
   #     config.client_secret = "your_client_secret"
   #     config.creditor_reference = "your_creditor_reference"
   #     config.sandbox = true
+  #     config.notify_url = 'you_notifications_url'
+  #     config.return_url = 'your_return_url'
   #   end
   def self.configure
     self.configuration ||= Configuration.new

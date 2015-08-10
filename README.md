@@ -35,8 +35,17 @@ Slimpay.configure do |config|
   config.client_secret = "your_client_secret"
   config.creditor_reference = "your_creditor_reference"
   config.sandbox = true
-end
+  config.notify_url = 'you_notifications_url'
+  config.return_url = 'your_return_url'
+end		
 ```
+
+### Notification and return URLs
+
+The notification URL is the point of your application where Slimpay will send a POST request with the result of the current order.
+The state of the order will be either **close.completed** or **closed.aborted.aborted_byclient** if everything worked normally, or one of those quoted in the [API Order documentation](https://api-sandbox.slimpay.net/docs/alps/v1/orders/).
+
+The return URL is the point of your application where your user/customer will be redirected to when he will have finish signing its mandate with Slimpay.
 
 ### The root endpoint:
 

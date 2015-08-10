@@ -26,13 +26,8 @@ module Slimpay
   #   client_secret: (String)
   #   creditor_reference: (String)
   class Base
-    def initialize(client_id = nil, client_secret = nil, creditor_reference = nil, sandbox = nil)
-      Slimpay.configuration ||= Configuration.new
-      @client_id = client_id || Slimpay.configuration.client_id
-      @client_secret = client_secret || Slimpay.configuration.client_secret
-      @creditor_reference = creditor_reference || Slimpay.configuration.creditor_reference
-      @sandbox = sandbox || Slimpay.configuration.sandbox
-      init_endpoint
+    def initialize
+      init_config
       connect_api_with_oauth
       api_response = JSON.parse(request_to_api)
       generate_api_methods(api_response)
@@ -57,12 +52,20 @@ module Slimpay
 
     private
 
-    def init_endpoint
+    def init_config
+      Slimpay.configuration ||= Configuration.new
+      @client_id = Slimpay.configuration.client_id
+      @client_secret = Slimpay.configuration.client_secret
+      @creditor_reference = Slimpay.configuration.creditor_reference
+      @sandbox = Slimpay.configuration.sandbox
+      @return_url = Slimpay.configuration.return_url
+      @notify_url = Slimpay.configuration.notify_url
       @endpoint = sandbox? ? SANDBOX_ENDPOINT : PRODUCTION_ENDPOINT
       @token_endpoint = @endpoint + '/oauth/token'
     end
 
-    # An empty request call to the endpoint lists resources.
+    # A request call to the endpoint.
+    # An empty call will return list of available methods in the API.
     def request_to_api(url = '')
       response = HTTParty.get("#{@endpoint}/#{url}", headers: options)
       Slimpay.answer response
@@ -75,6 +78,10 @@ module Slimpay
       @token = response.token
     end
 
+    # === Arguments:
+    #   name: (String) The method name
+    #   url: (String) URL called in the method block
+    #   api_args: (String) API arguments for this URL.
     def generate_method(name, url, api_args)
       if name.start_with?('create', 'post')
         generate_post_method(name, url)
@@ -114,6 +121,10 @@ module Slimpay
       end
     end
 
+    # Change APIs documented URL's arguments into real HTTP arguments through given method arguments
+    # ===== Arguments
+    #   api_args: (String) Slimpay given argument within URLs. Formated like: ?{arg1, arg2}
+    #   method_arguments: (String) Arguments called on the currently defined method.
     def format_html_arguments(api_args, method_arguments)
       url_args = ''
       api_args.split(',').each_with_index do |arg, index|
@@ -137,6 +148,7 @@ module Slimpay
       end
     end
 
+    # Catch up potential errors and generate new methods if needed.
     def follow_up_api(response)
       answer = Slimpay.answer(response)
       generate_api_methods(JSON.parse(response))

@@ -53,14 +53,12 @@ module Slimpay
     # POST
     # This will send a create_order request with
     # ===== Arguments
-    #   reference: (String) The reference to your User in your application. Use a unique key.
-    #   Slimpay will refer to it for future answers.
+    #   reference: (String) The reference to your User in your application. Use a unique key. Slimpay will refer to it for future answers.
+    #   signatory: (Hash) The Hahs representing your customer informations. See API Order documentation for details.
     # ===== Returns
     #   The url to the SEPA mandate approval page.
     def sign_mandate(reference = 'subscriber01', signatory = default_signatory)
       url = 'orders'
-      sepa = { bic: bic, iban: iban }
-      # TODO: set user infos by hand.
       body_options = {
         creditor: {
           reference: @creditor_reference

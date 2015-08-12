@@ -51,12 +51,15 @@ module Slimpay
     end
 
     # POST
-    # This will send a create_order request with
+    # This will send a create_order request with given signatory (subscriber Hash with infos)
+    #
+    # In case of success, this will generate a method accessible via the _.api_methods_ method.
+    # This method let you redirect the customer to the approval page : orders.api_methods['user_approval']
     # ===== Arguments
     #   reference: (String) The reference to your User in your application. Use a unique key. Slimpay will refer to it for future answers.
-    #   signatory: (Hash) The Hahs representing your customer informations. See API Order documentation for details.
+    #   signatory: (Hash) Your customer informations. See API Order documentation for details.
     # ===== Returns
-    #   The url to the SEPA mandate approval page.
+    #   a Hash representing the Mandate.
     def sign_mandate(reference = 'subscriber01', signatory = default_signatory)
       url = 'orders'
       body_options = {

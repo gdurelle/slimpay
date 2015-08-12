@@ -4,7 +4,7 @@ module Slimpay
   # Defines HAPI resource non-semantic methods.
   class Resource < Base
     def initialize
-      @resource_name = self.class.to_s.demodulize.downcase.pluralize
+      @resource_name = self.class.to_s.demodulize.underscore.dasherize.pluralize
       super
     end
 

@@ -11,10 +11,13 @@ require 'slimpay/resource'
 require 'slimpay/app'
 require 'slimpay/mandate'
 require 'slimpay/order'
+require 'slimpay/direct_debit'
 
 # :main: README.md
 
 # Slimpay module defines Simpay's HAPI constants and require dependencies.
+# TODO: If-None-Match support. (next answer ?= 304)
+# TODO: wiki/doc full worflow: 1. App to change URls, 2. Order to sign mandate, 3. DirectDebit to pay with mandate.
 module Slimpay
   PRODUCTION_ENDPOINT = 'https://api.slimpay.net'
   API_HEADER = "application/hal+json; profile='https://api.slimpay.net/alps/v1'"
@@ -56,7 +59,3 @@ module Slimpay
     end
   end
 end
-
-# # TODO: If-None-Match support. (next answer ?= 304)
-# require 'slimpay'
-# slimpay = Slimpay::Base.new

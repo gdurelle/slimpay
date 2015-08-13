@@ -8,3 +8,4 @@
 /spec/reports/
 /tmp/
 builds/
+*.DS_Store

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Slimpay::Mandate do
+RSpec.describe Slimpay::Mandate do
   include_examples 'Expect OAuth and first requests', Slimpay::Mandate
 
   subject { Slimpay::Mandate }

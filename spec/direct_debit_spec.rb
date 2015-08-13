@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Slimpay::DirectDebit do
+RSpec.describe Slimpay::DirectDebit do
   include_examples 'Expect OAuth and first requests', Slimpay::Base
 
   it 'is a Resource child' do

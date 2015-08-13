@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Slimpay do
+RSpec.describe Slimpay do
   it 'has a version number' do
     expect(Slimpay::VERSION).not_to be nil
   end

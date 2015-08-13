@@ -15,7 +15,7 @@ AbcSize:
   Max:  35
 
 PerceivedComplexity:
-  Max: 9
+  Max: 8
 
 TrailingBlankLines:
   Severity: error

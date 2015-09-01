@@ -53,7 +53,7 @@ module Slimpay
     private
 
     def init_config
-      Slimpay.configuration ||= Configuration.new
+      Slimpay.configuration ||= Slimpay::Configuration.new
       @client_id = Slimpay.configuration.client_id
       @client_secret = Slimpay.configuration.client_secret
       @creditor_reference = Slimpay.configuration.creditor_reference
@@ -157,7 +157,7 @@ module Slimpay
 
     def options
       {
-        'Accept' => API_HEADER,
+        'Accept' => @sandbox ? SANDBOX_API_HEADER : API_HEADER,
         'Authorization' => "Bearer #{@token}",
         'Content-type' => 'application/hal+json',
         'grant_type' => 'client_credentials',

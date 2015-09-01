@@ -21,7 +21,7 @@ require 'slimpay/direct_debit'
 module Slimpay
   PRODUCTION_ENDPOINT = 'https://api.slimpay.net'
   API_HEADER = "application/hal+json; profile='https://api.slimpay.net/alps/v1'"
-
+  SANDBOX_API_HEADER = "application/hal+json; profile='https://api-sandbox.slimpay.net/alps/v1'"
   SANDBOX_ENDPOINT = 'https://api-sandbox.slimpay.net'
   SANDBOX_CLIENT_ID = 'democreditor01'
   SANDBOX_SECRET_ID = 'demosecret01'

@@ -166,7 +166,7 @@ module Slimpay
     end
 
     def options
-      { 'Authorization' => "Bearer #{@token}" }
+      { 'Authorization' => "Bearer #{@token}", 'Content-type' => 'application/hal+json' }
     end
 
     def sandbox?

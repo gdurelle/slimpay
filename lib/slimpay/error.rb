@@ -4,6 +4,7 @@ module Slimpay
   # ==== Possible HAPI errors
   # * code: 906 message: "Error : Could not find acceptable representation"
   # * code: 906 message: "Error : Request method 'POST' not supported"
+  # * code: 906 message: "Error : Content type 'application/x-www-form-urlencoded' not supported"
   # * code: 904 message: "Access denied : cannot access creditor democreditor"
   # * error:"invalid_token", error_description: "Invalid access token: 1234-123456-abcdef-123456"
   # * code: 205, message: "Client data are inconsistent : missing query parameters creditorReference and/or rum"

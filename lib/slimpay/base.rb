@@ -40,6 +40,7 @@ module Slimpay
       methods = {}
       links = response['_links']
       links = links.merge(response['_embedded']['items'].first['_links']) if response['_embedded'] && response['_embedded']['items']
+      return if links.nil?
       links.each do |k, v|
         name = k.gsub('https://api.slimpay.net/alps#', '').underscore
         next if @methods && @methods.keys.include?(name) && !k.eql?('self')

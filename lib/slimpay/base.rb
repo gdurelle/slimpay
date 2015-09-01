@@ -73,7 +73,7 @@ module Slimpay
 
     # OAuth2 call to retrieve the token
     def connect_api_with_oauth
-      client = OAuth2::Client.new(@client_id, @client_secret, site: @token_endpoint, headers: options)
+      client = OAuth2::Client.new(@client_id, @client_secret, site: @token_endpoint, headers: oauth_options)
       response = client.client_credentials.get_token
       @token = response.token
     end
@@ -155,14 +155,17 @@ module Slimpay
       answer
     end
 
-    def options
+    def oauth_options
       {
         'Accept' => @sandbox ? SANDBOX_API_HEADER : API_HEADER,
-        'Authorization' => "Bearer #{@token}",
         'Content-type' => 'application/hal+json',
         'grant_type' => 'client_credentials',
         'scope' => 'api_admin'
       }
+    end
+
+    def options
+      { 'Authorization' => "Bearer #{@token}" }
     end
 
     def sandbox?

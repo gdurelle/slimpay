@@ -1,4 +1,4 @@
-[![build status](http://app-gitci-vm01.acticall.net/projects/1/status.png?ref=master)](http://app-gitci-vm01.acticall.net/projects/1?ref=master)
+[![Build Status](https://travis-ci.org/novagile/slimpay.svg)](https://travis-ci.org/novagile/slimpay)
 
 # Slimpay
 
@@ -37,7 +37,7 @@ Slimpay.configure do |config|
   config.sandbox = true
   config.notify_url = 'you_notifications_url'
   config.return_url = 'your_return_url'
-end		
+end
 ```
 
 ### Notification and return URLs
@@ -163,7 +163,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/gdurelle/slimpay. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/novagile/slimpay. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
 
 
 ## License

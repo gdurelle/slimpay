@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %(Slimpay HAPI for Ruby.)
   spec.description   = %(Ruby library for Slimpay's Hypermedia API.)
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.homepage      = "https://github.com/novagile/slimpay"
   spec.license       = 'MIT'
 
   spec.post_install_message = %(Please refer to Slimpay's API https://api-sandbox.slimpay.net/docs for more informations.)

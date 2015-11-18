@@ -2,7 +2,9 @@
 
 # Slimpay
 
-Ruby implementation of the Slimpay Hypermedia API.
+Ruby implementation of the [Slimpay Hypermedia API](https://api-sandbox.slimpay.net/docs/).
+
+Slimpay website : [slimpay.com](https://www.slimpay.com/)
 
 ## Installation
 

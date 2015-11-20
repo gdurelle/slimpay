@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/novagile/slimpay.svg)](https://travis-ci.org/novagile/slimpay)
+[![Gem Version](https://badge.fury.io/rb/slimpay.svg)](https://badge.fury.io/rb/slimpay)
 
 # Slimpay
 

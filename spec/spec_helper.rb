@@ -10,10 +10,3 @@ VCR.configure do |config|
   config.ignore_localhost = true
   config.configure_rspec_metadata!
 end
-
-RSpec::Core::RakeTask.new(:spec) do |t|
-  t.pattern = Dir.glob('**/*_spec.rb').reject do |path|
-    path.include?('vendor')  # tell travis CI to ignore vendor tests
-  end
-  # t.rspec_opts = '--format documentation'
-end

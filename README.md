@@ -1,8 +1,11 @@
 [![Build Status](https://travis-ci.org/novagile/slimpay.svg)](https://travis-ci.org/novagile/slimpay)
+[![Gem Version](https://badge.fury.io/rb/slimpay.svg)](https://badge.fury.io/rb/slimpay)
 
 # Slimpay
 
-Ruby implementation of the Slimpay Hypermedia API.
+Ruby implementation of the [Slimpay Hypermedia API](https://api-sandbox.slimpay.net/docs/).
+
+Slimpay website : [slimpay.com](https://www.slimpay.com/)
 
 ## Installation
 

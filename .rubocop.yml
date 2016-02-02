@@ -1,6 +1,7 @@
 AllCops:
   Exclude:
     - 'bin/**/*'
+    - 'vendor/**/*'
   RunRailsCops: false
 
 LineLength:

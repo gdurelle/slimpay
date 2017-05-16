@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/novagile/slimpay.svg)](https://travis-ci.org/novagile/slimpay)
-[![Gem Version](https://badge.fury.io/rb/slimpay.svg)](https://badge.fury.io/rb/slimpay)
+[![Build Status](https://travis-ci.org/gdurelle/slimpay.svg?branch=master)](https://travis-ci.org/gdurelle/slimpay)
+[![GitHub version](https://badge.fury.io/gh/gdurelle%2Fslimpay.svg)](https://badge.fury.io/gh/gdurelle%2Fslimpay)
 
 # Slimpay
 

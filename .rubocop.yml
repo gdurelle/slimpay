@@ -6,6 +6,9 @@ AllCops:
 Rails:
   Enabled: false
 
+Rails/RelativeDateConstant:
+  Enabled: false
+
 LineLength:
   Max: 160
   Severity: error

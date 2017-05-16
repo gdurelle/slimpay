@@ -4,5 +4,5 @@ cache: bundler
 rvm:
   - "2.2.3"
 script:
-  - bundle exec rubocop -R --config .rubocop.yml --fail-level error --force-exclusion
+  - bundle exec rubocop --config .rubocop.yml --fail-level error --force-exclusion
   - bundle exec rspec

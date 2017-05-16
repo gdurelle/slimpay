@@ -98,13 +98,12 @@ module Slimpay
       self.class.send(:define_method, name) do |method_arguments = nil|
         if api_args.nil?
           response = HTTParty.get(url, headers: options)
-          follow_up_api(response)
         else
           clean_url = url.gsub(/{\?.*/, '')
           url_args = format_html_arguments(api_args, method_arguments)
           response = HTTParty.get("#{clean_url}?#{url_args}", headers: options)
-          follow_up_api(response)
         end
+        follow_up_api(response)
       end
     end
 

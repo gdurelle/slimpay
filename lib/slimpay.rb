@@ -19,13 +19,13 @@ require 'slimpay/direct_debit'
 # TODO: If-None-Match support. (next answer ?= 304)
 # TODO: wiki/doc full worflow: 1. App to change URls, 2. Order to sign mandate, 3. DirectDebit to pay with mandate.
 module Slimpay
-  PRODUCTION_ENDPOINT = 'https://api.slimpay.net'
-  API_HEADER = "application/hal+json; profile='https://api.slimpay.net/alps/v1'"
-  SANDBOX_API_HEADER = "application/hal+json; profile='https://api-sandbox.slimpay.net/alps/v1'"
-  SANDBOX_ENDPOINT = 'https://api-sandbox.slimpay.net'
-  SANDBOX_CLIENT_ID = 'democreditor01'
-  SANDBOX_SECRET_ID = 'demosecret01'
-  SANDBOX_CREDITOR = 'democreditor'
+  PRODUCTION_ENDPOINT = 'https://api.slimpay.net'.freeze
+  API_HEADER = "application/hal+json; profile='https://api.slimpay.net/alps/v1'".freeze
+  SANDBOX_API_HEADER = "application/hal+json; profile='https://api-sandbox.slimpay.net/alps/v1'".freeze
+  SANDBOX_ENDPOINT = 'https://api-sandbox.slimpay.net'.freeze
+  SANDBOX_CLIENT_ID = 'democreditor01'.freeze
+  SANDBOX_SECRET_ID = 'demosecret01'.freeze
+  SANDBOX_CREDITOR = 'democreditor'.freeze
 
   class << self
     attr_accessor :configuration

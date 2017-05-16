@@ -34,20 +34,20 @@ module Slimpay
     private
 
     def display_http_error(http_response)
-      case http_response.code
-      when 400
-        @message = bad_request(http_response)
-      when 401
-        @message = unauthorized(http_response)
-      when 403
-        @message = forbidden(http_response)
-      when 404
-        @message = not_found
-      when 406
-        @message = not_acceptable(http_response)
-      else
-        @message = http_response
-      end
+      @message = case http_response.code
+                 when 400
+                   bad_request(http_response)
+                 when 401
+                   unauthorized(http_response)
+                 when 403
+                   forbidden(http_response)
+                 when 404
+                   not_found
+                 when 406
+                   not_acceptable(http_response)
+                 else
+                   http_response
+                 end
     end
 
     def bad_request(http_message)

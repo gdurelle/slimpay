@@ -3,9 +3,6 @@ AllCops:
     - 'bin/**/*'
     - 'spec/**/*'
 
-Rails:
-  Enable: false
-
 LineLength:
   Max: 160
   Severity: error

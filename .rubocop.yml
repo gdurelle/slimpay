@@ -1,8 +1,10 @@
 AllCops:
   Exclude:
     - 'bin/**/*'
-    - 'vendor/**/*'
-  RunRailsCops: false
+    - 'spec/**/*'
+
+Rails:
+  Enable: false
 
 LineLength:
   Max: 160
@@ -24,9 +26,9 @@ TrailingBlankLines:
 EndOfLine:
   Severity: error
 
-TrailingComma:
-  EnforcedStyleForMultiline: no_comma
-  Severity: error
+# TrailingComma:
+#   EnforcedStyleForMultiline: no_comma
+#   Severity: error
 
 EmptyLines:
   Severity: error

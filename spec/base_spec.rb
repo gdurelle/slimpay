@@ -5,13 +5,15 @@ RSpec.describe Slimpay::Base do
 
   describe '#generate_api_methods' do
     let(:methods) do
-      { '_links' =>
+      {
+        '_links' =>
           { 'https://api.slimpay.net/alps#lorem' => { 'href' => 'https://api.slimpay.net/alps#lorem' },
           'https://api.slimpay.net/alps#ipsum' => { 'href' => 'https://api.slimpay.net/alps#ipsum' } }
       }
     end
     let(:next_methods) do
-      { '_links' =>
+      {
+        '_links' =>
           { 'https://api.slimpay.net/alps#dolor_sit' => { 'href' => 'https://api.slimpay.net/alps#dolor_sit' },
           'https://api.slimpay.net/alps#amet' => { 'href' => 'https://api.slimpay.net/alps#amet' } }
       }

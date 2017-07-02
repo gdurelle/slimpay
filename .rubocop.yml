@@ -2,6 +2,7 @@ AllCops:
   Exclude:
     - 'bin/**/*'
     - 'spec/**/*'
+    - 'vendor/**/*'
 
 Rails:
   Enabled: false
@@ -31,10 +32,6 @@ TrailingBlankLines:
 
 EndOfLine:
   Severity: error
-
-# TrailingComma:
-#   EnforcedStyleForMultiline: no_comma
-#   Severity: error
 
 EmptyLines:
   Severity: error
@@ -130,7 +127,7 @@ AndOr:
 RescueModifier:
   Enabled: false
 
-ClassLength:
+Metrics/ClassLength:
   Enabled: false
 
 IndentationWidth:

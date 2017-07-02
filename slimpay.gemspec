@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %(Slimpay HAPI for Ruby.)
   spec.description   = %(Ruby library for Slimpay's Hypermedia API.)
-  spec.homepage      = "https://github.com/novagile/slimpay"
+  spec.homepage      = "https://github.com/gdurelle/slimpay"
   spec.license       = 'MIT'
 
   spec.post_install_message = %(Please refer to Slimpay's API https://api-sandbox.slimpay.net/docs for more informations.)

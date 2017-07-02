@@ -9,6 +9,9 @@ Rails:
 Rails/RelativeDateConstant:
   Enabled: false
 
+Style/NilComparison:
+  Enabled: false
+
 LineLength:
   Max: 160
   Severity: error

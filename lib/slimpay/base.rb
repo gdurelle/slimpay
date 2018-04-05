@@ -30,6 +30,7 @@ module Slimpay
       init_config
       connect_api_with_oauth
       api_response = JSON.parse(request_to_api)
+      p api_response
       generate_api_methods(api_response)
     end
 
@@ -69,7 +70,7 @@ module Slimpay
     # An empty call will return list of available methods in the API.
     def request_to_api(url = '')
       response = HTTParty.get("#{@endpoint}/#{url}", headers: options)
-      Slimpay.answer response
+      Slimpay.answer(response).to_json
     end
 
     # OAuth2 call to retrieve the token
@@ -157,10 +158,10 @@ module Slimpay
 
     def oauth_options
       {
-        'Accept' => @sandbox ? SANDBOX_API_HEADER : API_HEADER,
-        'Content-type' => 'application/hal+json',
-        'grant_type' => 'client_credentials',
-        'scope' => 'api_admin'
+          'Accept' => 'application/json',
+          'Content-type' => 'application/x-www-form-urlencoded',
+          'grant_type' => 'client_credentials',
+          'scope' => 'api'
       }
     end
 

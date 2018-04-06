@@ -157,10 +157,10 @@ module Slimpay
 
     def oauth_options
       {
-          'Accept' => 'application/json',
-          'Content-type' => 'application/x-www-form-urlencoded',
-          'grant_type' => 'client_credentials',
-          'scope' => 'api'
+        'Accept' => 'application/json',
+        'Content-type' => 'application/x-www-form-urlencoded',
+        'grant_type' => 'client_credentials',
+        'scope' => 'api'
       }
     end
 

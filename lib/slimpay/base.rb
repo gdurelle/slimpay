@@ -30,7 +30,6 @@ module Slimpay
       init_config
       connect_api_with_oauth
       api_response = JSON.parse(request_to_api)
-      p api_response
       generate_api_methods(api_response)
     end
 
@@ -70,7 +69,7 @@ module Slimpay
     # An empty call will return list of available methods in the API.
     def request_to_api(url = '')
       response = HTTParty.get("#{@endpoint}/#{url}", headers: options)
-      Slimpay.answer(response).to_json
+      Slimpay.answer(response)
     end
 
     # OAuth2 call to retrieve the token
@@ -152,7 +151,7 @@ module Slimpay
     # Catch up potential errors and generate new methods if needed.
     def follow_up_api(response)
       answer = Slimpay.answer(response)
-      generate_api_methods(JSON.parse(response))
+      generate_api_methods(response)
       answer
     end
 

@@ -53,7 +53,7 @@ module Slimpay
     if http_response.code >= 400
       Slimpay::Error.new(http_response)
     else
-      http_response
+      http_response.body
     end
   end
 end

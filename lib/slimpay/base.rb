@@ -74,7 +74,7 @@ module Slimpay
 
     # OAuth2 call to retrieve the token
     def connect_api_with_oauth
-      client = OAuth2::Client.new(@client_id, @client_secret, site: @token_endpoint, headers: oauth_options)
+      client = OAuth2::Client.new(@client_id, @client_secret, site: @token_endpoint, headers: oauth_options, auth_scheme: :basic_auth)
       response = client.client_credentials.get_token
       @token = response.token
     end

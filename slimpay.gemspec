@@ -28,7 +28,7 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'activesupport', '~> 5.1', '>= 5.1.1'
+  spec.add_dependency 'activesupport'
   spec.add_dependency 'httparty', '~> 0.16'
   spec.add_dependency 'oauth2', '~> 1.4'
 

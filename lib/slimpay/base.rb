@@ -69,7 +69,7 @@ module Slimpay
     # An empty call will return list of available methods in the API.
     def request_to_api(url = '')
       response = HTTParty.get("#{@endpoint}/#{url}", headers: options)
-      Slimpay.answer(response)
+      Slimpay.answer response
     end
 
     # OAuth2 call to retrieve the token

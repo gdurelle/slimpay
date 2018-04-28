@@ -1,6 +1,4 @@
-# coding: utf-8
-
-lib = File.expand_path('../lib', __FILE__)
+lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'slimpay/version'
 
@@ -12,7 +10,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %(Slimpay HAPI for Ruby.)
   spec.description   = %(Ruby library for Slimpay's Hypermedia API.)
-  spec.homepage      = "https://github.com/novagile/slimpay"
+  spec.homepage      = "https://github.com/gdurelle/slimpay"
   spec.license       = 'MIT'
 
   spec.post_install_message = %(Please refer to Slimpay's API https://api-sandbox.slimpay.net/docs for more informations.)
@@ -30,14 +28,14 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'oauth2', '~> 1.3', '>= 1.3.1'
-  spec.add_dependency 'httparty', '~> 0.15', '>= 0.15.3'
-  spec.add_dependency 'activesupport', '~> 5.1', '>= 5.1.1'
+  spec.add_dependency 'activesupport'
+  spec.add_dependency 'httparty', '~> 0.16'
+  spec.add_dependency 'oauth2', '~> 1.4'
 
-  spec.add_development_dependency 'bundler', '~> 1.14'
+  spec.add_development_dependency 'bundler', '~> 1.16'
   spec.add_development_dependency 'rake', '~> 12.0'
-  spec.add_development_dependency 'rspec', '~> 3.6', '>= 3.6.0'
-  spec.add_development_dependency 'vcr', '~> 3.0', '>= 3.0.3'
-  spec.add_development_dependency 'webmock', '~> 3.0', '>= 3.0.1'
-  spec.add_development_dependency 'rubocop', '~> 0.48.1'
+  spec.add_development_dependency 'rspec', '~> 3.7'
+  spec.add_development_dependency 'rubocop', '~> 0.54'
+  spec.add_development_dependency 'vcr', '~> 4.0'
+  spec.add_development_dependency 'webmock', '~> 3.0'
 end

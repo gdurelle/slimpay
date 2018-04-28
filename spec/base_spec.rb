@@ -43,7 +43,7 @@ RSpec.describe Slimpay::Base do
   end
 
   describe '#request_to_api', vcr: { cassette_name: 'slimpay_root_endpoint' } do
-    it 'calls SLimpay HAPI root endpoint' do
+    it 'calls Slimpay HAPI root endpoint' do
       slim = Slimpay::Base.new
       expect(slim.api_methods).to be_kind_of(Hash)
       expect(slim.api_methods.keys).to include('create_orders', 'get_direct_debits')

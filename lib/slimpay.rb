@@ -19,10 +19,8 @@ require 'slimpay/direct_debit'
 # TODO: If-None-Match support. (next answer ?= 304)
 # TODO: wiki/doc full worflow: 1. App to change URls, 2. Order to sign mandate, 3. DirectDebit to pay with mandate.
 module Slimpay
-  PRODUCTION_ENDPOINT = 'https://api.slimpay.net'.freeze
-  API_HEADER = "application/hal+json; profile='https://api.slimpay.net/alps/v1'".freeze
-  SANDBOX_API_HEADER = "application/hal+json; profile='https://api-sandbox.slimpay.net/alps/v1'".freeze
-  SANDBOX_ENDPOINT = 'https://api-sandbox.slimpay.net'.freeze
+  PRODUCTION_ENDPOINT = 'https://api.slimpay.com'.freeze
+  SANDBOX_ENDPOINT = 'https://api.preprod.slimpay.com'.freeze
   SANDBOX_CLIENT_ID = 'democreditor01'.freeze
   SANDBOX_SECRET_ID = 'demosecret01'.freeze
   SANDBOX_CREDITOR = 'democreditor'.freeze
@@ -55,7 +53,7 @@ module Slimpay
     if http_response.code >= 400
       Slimpay::Error.new(http_response)
     else
-      http_response
+      http_response.body
     end
   end
 end

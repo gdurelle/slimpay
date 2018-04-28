@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://api-sandbox.slimpay.net/oauth/token
+    uri: https://api.preprod.slimpay.com/oauth/token
     body:
       encoding: UTF-8
       string: grant_type=client_credentials
@@ -20,348 +20,345 @@ http_interactions:
   response:
     status:
       code: 200
-      message: OK
+      message: ''
     headers:
-      Date:
-      - Tue, 16 May 2017 05:45:36 GMT
-      Server:
-      - Apache-Coyote/1.1
-      Strict-Transport-Security:
-      - max-age=63072000; includeSubdomains; preload
-      Access-Control-Allow-Origin:
-      - "*"
-      Access-Control-Allow-Methods:
-      - POST, PATCH, GET, OPTIONS, DELETE
-      Access-Control-Max-Age:
-      - '3600'
       Access-Control-Allow-Headers:
       - x-requested-with, authorization, content-type, accept
-      X-Content-Type-Options:
-      - nosniff
-      X-Xss-Protection:
-      - 1; mode=block
+      Access-Control-Allow-Methods:
+      - POST, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '3600'
       Cache-Control:
-      - no-cache, no-store, max-age=0, must-revalidate
       - no-store
-      Pragma:
-      - no-cache
-      - no-cache
-      Expires:
-      - '0'
-      X-Frame-Options:
-      - DENY
-      X-Application-Context:
-      - application:preprod:${rest.server.port}
       Content-Type:
       - application/json;charset=UTF-8
+      Date:
+      - Fri, 06 Apr 2018 08:33:32 GMT
+      Pragma:
+      - no-cache
+      X-Application-Context:
+      - application:8080
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - DENY
+      X-Xss-Protection:
+      - 1; mode=block
       Content-Length:
       - '368'
+      Connection:
+      - keep-alive
     body:
       encoding: UTF-8
       string: |-
         {
-          "access_token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZSI6WyJhcGkiXSwiZXhwIjoxNDk0OTE0NTM1LCJqdGkiOiI0ZDJmMzMyOS01NjhmLTQ2MmQtYjBkOC00NTAzZjYyM2NkYjAiLCJjbGllbnRfaWQiOiJkZW1vY3JlZGl0b3IwMSJ9.stpdghq1czWPnlAQkbHLTotQWh4YFwDUHIcfCUD3vEM",
+          "access_token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZSI6WyJhcGkiXSwiZXhwIjoxNTIzMDA0NjExLCJqdGkiOiI3OWMyNTE2NS1mMmM0LTQ4Y2UtODVhZi00NDQ4N2ZiOGE2YWEiLCJjbGllbnRfaWQiOiJkZW1vY3JlZGl0b3IwMSJ9.iWomgtubVbuWwxksh3-7a5hM3VLJYbqRk5-x9raQ5FI",
           "token_type" : "bearer",
-          "expires_in" : 999,
+          "expires_in" : 998,
           "scope" : "api",
-          "jti" : "4d2f3329-568f-462d-b0d8-4503f623cdb0"
+          "jti" : "79c25165-f2c4-48ce-85af-44487fb8a6aa"
         }
-    http_version:
-  recorded_at: Tue, 16 May 2017 05:45:31 GMT
+    http_version: 
+  recorded_at: Fri, 06 Apr 2018 08:33:32 GMT
 - request:
     method: get
-    uri: https://api-sandbox.slimpay.net/
+    uri: https://api.preprod.slimpay.com/
     body:
       encoding: US-ASCII
       string: ''
     headers:
       Authorization:
-      - Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZSI6WyJhcGkiXSwiZXhwIjoxNDk0OTE0NTM1LCJqdGkiOiI0ZDJmMzMyOS01NjhmLTQ2MmQtYjBkOC00NTAzZjYyM2NkYjAiLCJjbGllbnRfaWQiOiJkZW1vY3JlZGl0b3IwMSJ9.stpdghq1czWPnlAQkbHLTotQWh4YFwDUHIcfCUD3vEM
+      - Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZSI6WyJhcGkiXSwiZXhwIjoxNTIzMDA0NjExLCJqdGkiOiI3OWMyNTE2NS1mMmM0LTQ4Y2UtODVhZi00NDQ4N2ZiOGE2YWEiLCJjbGllbnRfaWQiOiJkZW1vY3JlZGl0b3IwMSJ9.iWomgtubVbuWwxksh3-7a5hM3VLJYbqRk5-x9raQ5FI
       Content-Type:
       - application/json
   response:
     status:
       code: 200
-      message: OK
+      message: ''
     headers:
-      Date:
-      - Tue, 16 May 2017 05:45:38 GMT
-      Server:
-      - Apache-Coyote/1.1
-      Strict-Transport-Security:
-      - max-age=63072000; includeSubdomains; preload
-      Access-Control-Allow-Origin:
-      - "*"
-      Access-Control-Allow-Methods:
-      - POST, PATCH, GET, OPTIONS, DELETE
-      Access-Control-Max-Age:
-      - '3600'
       Access-Control-Allow-Headers:
       - x-requested-with, authorization, content-type, accept
-      X-Content-Type-Options:
-      - nosniff
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Frame-Options:
-      - DENY
-      X-Application-Context:
-      - application:preprod:${rest.server.port}
-      Etag:
-      - '"03236d64c4bd2f7baf4c43a327251afbb"'
+      Access-Control-Allow-Methods:
+      - POST, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '3600'
       Content-Type:
       - application/hal+json; profile="https://api.slimpay.net/alps/v1";charset=UTF-8
+      Date:
+      - Fri, 06 Apr 2018 08:33:32 GMT
+      Etag:
+      - '"0b727478b3a613be0fbac6693db1e396f"'
+      X-Application-Context:
+      - application:8080
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - DENY
+      X-Xss-Protection:
+      - 1; mode=block
       Content-Length:
-      - '7669'
+      - '8197'
+      Connection:
+      - keep-alive
     body:
       encoding: UTF-8
       string: |-
         {
           "_links" : {
             "self" : {
-              "href" : "https://api-sandbox.slimpay.net/"
+              "href" : "https://api.preprod.slimpay.com/"
             },
             "profile" : {
-              "href" : "https://api-sandbox.slimpay.net/alps/v1"
+              "href" : "https://api.preprod.slimpay.com/alps/v1"
             },
             "https://api.slimpay.net/alps#post-token" : {
-              "href" : "https://api-sandbox.slimpay.net/oauth/token"
+              "href" : "https://api.preprod.slimpay.com/oauth/token"
             },
             "https://api.slimpay.net/alps#create-orders" : {
-              "href" : "https://api-sandbox.slimpay.net/orders"
+              "href" : "https://api.preprod.slimpay.com/orders"
             },
             "https://api.slimpay.net/alps#get-orders" : {
-              "href" : "https://api-sandbox.slimpay.net/orders{?creditorReference,reference}",
+              "href" : "https://api.preprod.slimpay.com/orders{?creditorReference,reference}",
               "templated" : true
             },
             "https://api.slimpay.net/alps#search-order-by-id" : {
-              "href" : "https://api-sandbox.slimpay.net/orders/{id}",
+              "href" : "https://api.preprod.slimpay.com/orders/{id}",
               "templated" : true
             },
             "https://api.slimpay.net/alps#search-orders" : {
-              "href" : "https://api-sandbox.slimpay.net/orders{?creditorReference,entityReference,subscriberReference,state,dateCreatedBefore,dateCreatedAfter,page,size}",
+              "href" : "https://api.preprod.slimpay.com/orders{?creditorReference,entityReference,subscriberReference,state,dateCreatedBefore,dateCreatedAfter,page,size}",
               "templated" : true
             },
             "https://api.slimpay.net/alps#get-creditors" : {
-              "href" : "https://api-sandbox.slimpay.net/creditors{?reference}",
+              "href" : "https://api.preprod.slimpay.com/creditors{?reference}",
               "templated" : true
             },
             "https://api.slimpay.net/alps#create-mandates" : {
-              "href" : "https://api-sandbox.slimpay.net/mandates"
+              "href" : "https://api.preprod.slimpay.com/mandates"
             },
             "https://api.slimpay.net/alps#get-mandates" : {
-              "href" : "https://api-sandbox.slimpay.net/mandates{?creditorReference,reference,rum,id,paymentScheme}",
+              "href" : "https://api.preprod.slimpay.com/mandates{?creditorReference,reference,rum,id,paymentScheme}",
               "templated" : true
             },
             "https://api.slimpay.net/alps#search-mandates" : {
-              "href" : "https://api-sandbox.slimpay.net/mandates{?creditorReference,entityReference,subscriberReference,paymentScheme,dateSignedBefore,dateSignedAfter,state,page,size}",
+              "href" : "https://api.preprod.slimpay.com/mandates{?creditorReference,entityReference,subscriberReference,mandateReference,paymentScheme,dateSignedBefore,dateSignedAfter,state,page,size}",
               "templated" : true
             },
             "https://api.slimpay.net/alps#create-documents" : {
-              "href" : "https://api-sandbox.slimpay.net/documents"
+              "href" : "https://api.preprod.slimpay.com/documents"
             },
             "https://api.slimpay.net/alps#get-documents" : {
-              "href" : "https://api-sandbox.slimpay.net/documents{?creditorReference,entityReference,reference}",
+              "href" : "https://api.preprod.slimpay.com/documents{?creditorReference,entityReference,reference}",
               "templated" : true
             },
             "https://api.slimpay.net/alps#create-payins" : {
-              "href" : "https://api-sandbox.slimpay.net/payments/in"
+              "href" : "https://api.preprod.slimpay.com/payments/in"
             },
             "https://api.slimpay.net/alps#create-payouts" : {
-              "href" : "https://api-sandbox.slimpay.net/payments/out"
+              "href" : "https://api.preprod.slimpay.com/payments/out"
             },
             "https://api.slimpay.net/alps#search-payments" : {
-              "href" : "https://api-sandbox.slimpay.net/payments{?creditorReference,entityReference,subscriberReference,mandateReference,cardAliasReference,scheme,reference,currency,executionStatus,executionDateBefore,executionDateAfter,page,size}",
+              "href" : "https://api.preprod.slimpay.com/payments{?creditorReference,entityReference,subscriberReference,mandateReference,cardAliasReference,scheme,direction,reference,category,currency,state,executionStatus,processor,executionDateBefore,executionDateAfter,page,size}",
               "templated" : true
             },
             "https://api.slimpay.net/alps#search-payment-by-id" : {
-              "href" : "https://api-sandbox.slimpay.net/payments/{id}",
+              "href" : "https://api.preprod.slimpay.com/payments/{id}",
               "templated" : true
             },
             "https://api.slimpay.net/alps#search-payment-issues" : {
-              "href" : "https://api-sandbox.slimpay.net/payment-issues{?creditorReference,entityReference,subscriberReference,scheme,currency,executionStatus,dateCreatedBefore,dateCreatedAfter,page,size}",
+              "href" : "https://api.preprod.slimpay.com/payment-issues{?creditorReference,entityReference,subscriberReference,scheme,currency,executionStatus,dateCreatedBefore,dateCreatedAfter,page,size}",
               "templated" : true
             },
             "https://api.slimpay.net/alps#search-payment-issue-by-id" : {
-              "href" : "https://api-sandbox.slimpay.net/payment-issues/{id}",
+              "href" : "https://api.preprod.slimpay.com/payment-issues/{id}",
               "templated" : true
             },
             "https://api.slimpay.net/alps#create-direct-debits" : {
-              "href" : "https://api-sandbox.slimpay.net/direct-debits"
+              "href" : "https://api.preprod.slimpay.com/direct-debits"
             },
             "https://api.slimpay.net/alps#get-direct-debits" : {
-              "href" : "https://api-sandbox.slimpay.net/direct-debits{?id}",
+              "href" : "https://api.preprod.slimpay.com/direct-debits{?id}",
               "templated" : true
             },
             "https://api.slimpay.net/alps#search-direct-debits" : {
-              "href" : "https://api-sandbox.slimpay.net/direct-debits{?creditorReference,entityReference,subscriberReference,mandateReference,paymentReference,currency,executionDateBefore,executionDateAfter,page,size}",
+              "href" : "https://api.preprod.slimpay.com/direct-debits{?creditorReference,entityReference,subscriberReference,mandateReference,paymentReference,currency,executionDateBefore,executionDateAfter,page,size}",
               "templated" : true
             },
             "https://api.slimpay.net/alps#search-direct-debit-issues" : {
-              "href" : "https://api-sandbox.slimpay.net/direct-debit-issues{?creditorReference,entityReference,subscriberReference,currency,executionStatus,dateCreatedBefore,dateCreatedAfter,page,size}",
+              "href" : "https://api.preprod.slimpay.com/direct-debit-issues{?creditorReference,entityReference,subscriberReference,currency,executionStatus,dateCreatedBefore,dateCreatedAfter,page,size}",
               "templated" : true
             },
             "https://api.slimpay.net/alps#get-direct-debit-issues" : {
-              "href" : "https://api-sandbox.slimpay.net/direct-debit-issues{?id}",
+              "href" : "https://api.preprod.slimpay.com/direct-debit-issues{?id}",
               "templated" : true
             },
             "https://api.slimpay.net/alps#create-recurrent-direct-debits" : {
-              "href" : "https://api-sandbox.slimpay.net/recurrent-direct-debits"
+              "href" : "https://api.preprod.slimpay.com/recurrent-direct-debits"
             },
             "https://api.slimpay.net/alps#get-recurrent-direct-debits" : {
-              "href" : "https://api-sandbox.slimpay.net/recurrent-direct-debits{?id}",
+              "href" : "https://api.preprod.slimpay.com/recurrent-direct-debits{?id}",
               "templated" : true
             },
             "https://api.slimpay.net/alps#search-recurrent-direct-debits" : {
-              "href" : "https://api-sandbox.slimpay.net/recurrent-direct-debits{?creditorReference,entityReference,subscriberReference,reference,currency,activated,frequency,dateFromBefore,dateFromAfter,page,size}",
+              "href" : "https://api.preprod.slimpay.com/recurrent-direct-debits{?creditorReference,entityReference,subscriberReference,reference,currency,activated,frequency,dateFromBefore,dateFromAfter,page,size}",
               "templated" : true
             },
             "https://api.slimpay.net/alps#create-credit-transfers" : {
-              "href" : "https://api-sandbox.slimpay.net/credit-transfers"
+              "href" : "https://api.preprod.slimpay.com/credit-transfers"
             },
             "https://api.slimpay.net/alps#get-credit-transfers" : {
-              "href" : "https://api-sandbox.slimpay.net/credit-transfers{?id}",
+              "href" : "https://api.preprod.slimpay.com/credit-transfers{?id}",
               "templated" : true
             },
             "https://api.slimpay.net/alps#search-credit-transfers" : {
-              "href" : "https://api-sandbox.slimpay.net/credit-transfers{?creditorReference,entityReference,subscriberReference,mandateReference,paymentReference,currency,executionDateBefore,executionDateAfter,page,size}",
+              "href" : "https://api.preprod.slimpay.com/credit-transfers{?creditorReference,entityReference,subscriberReference,mandateReference,paymentReference,currency,executionDateBefore,executionDateAfter,page,size}",
               "templated" : true
             },
             "https://api.slimpay.net/alps#create-card-transactions" : {
-              "href" : "https://api-sandbox.slimpay.net/card-transactions"
+              "href" : "https://api.preprod.slimpay.com/card-transactions"
             },
             "https://api.slimpay.net/alps#get-card-transactions" : {
-              "href" : "https://api-sandbox.slimpay.net/card-transactions{?id}",
+              "href" : "https://api.preprod.slimpay.com/card-transactions{?id}",
               "templated" : true
             },
             "https://api.slimpay.net/alps#get-card-aliases" : {
-              "href" : "https://api-sandbox.slimpay.net/card-aliases{?id}",
+              "href" : "https://api.preprod.slimpay.com/card-aliases{?id}",
               "templated" : true
             },
             "https://api.slimpay.net/alps#search-card-aliases" : {
-              "href" : "https://api-sandbox.slimpay.net/card-aliases{?creditorReference,entityReference,subscriberReference,reference,status,page,size}",
+              "href" : "https://api.preprod.slimpay.com/card-aliases{?creditorReference,entityReference,subscriberReference,reference,status,page,size}",
               "templated" : true
             },
             "https://api.slimpay.net/alps#search-card-by-id" : {
-              "href" : "https://api-sandbox.slimpay.net/cards/cards/{id}",
+              "href" : "https://api.preprod.slimpay.com/cards/cards/{id}",
               "templated" : true
             },
             "https://api.slimpay.net/alps#get-recurrent-card-transactions" : {
-              "href" : "https://api-sandbox.slimpay.net/recurrent-card-transactions{?id}",
+              "href" : "https://api.preprod.slimpay.com/recurrent-card-transactions{?id}",
               "templated" : true
             },
+            "https://api.slimpay.net/alps#search-recurrent-card-transactions" : {
+              "href" : "https://api.preprod.slimpay.com/recurrent-card-transactions{?creditorReference,entityReference,subscriberReference,reference,currency,activated,frequency,dateFromBefore,dateFromAfter,page,size}",
+              "templated" : true
+            },
+            "https://api.slimpay.net/alps#create-recurrent-card-transactions" : {
+              "href" : "https://api.preprod.slimpay.com/recurrent-card-transactions"
+            },
             "https://api.slimpay.net/alps#get-card-transaction-issues" : {
-              "href" : "https://api-sandbox.slimpay.net/card-transaction-issues{?id}",
+              "href" : "https://api.preprod.slimpay.com/card-transaction-issues{?id}",
               "templated" : true
             },
             "https://api.slimpay.net/alps#search-bank-account-by-id" : {
-              "href" : "https://api-sandbox.slimpay.net/bank-accounts{?id}",
+              "href" : "https://api.preprod.slimpay.com/bank-accounts{?id}",
               "templated" : true
             },
             "https://api.slimpay.net/alps#search-balances" : {
-              "href" : "https://api-sandbox.slimpay.net/balances{?creditorReference,entityReference,currency,page,size}",
+              "href" : "https://api.preprod.slimpay.com/balances{?creditorReference,entityReference,currency,page,size}",
               "templated" : true
             },
             "https://api.slimpay.net/alps#search-order-item-by-id" : {
-              "href" : "https://api-sandbox.slimpay.net/order-items/{id}",
+              "href" : "https://api.preprod.slimpay.com/order-items/{id}",
               "templated" : true
             },
             "https://api.slimpay.net/alps#search-subscribers" : {
-              "href" : "https://api-sandbox.slimpay.net/subscribers{?creditorReference,entityReference,reference,page,size}",
+              "href" : "https://api.preprod.slimpay.com/subscribers{?creditorReference,entityReference,reference,page,size}",
               "templated" : true
             },
             "https://api.slimpay.net/alps#search-report" : {
-              "href" : "https://api-sandbox.slimpay.net/reports{?creditorReference,entityReference,dateFrom,dateTo}",
+              "href" : "https://api.preprod.slimpay.com/reports{?creditorReference,entityReference,dateFrom,dateTo}",
               "templated" : true
             }
           }
         }
-    http_version:
-  recorded_at: Tue, 16 May 2017 05:45:33 GMT
+    http_version: 
+  recorded_at: Fri, 06 Apr 2018 08:33:32 GMT
 - request:
     method: post
-    uri: https://api-sandbox.slimpay.net/orders
+    uri: https://api.preprod.slimpay.com/orders
     body:
       encoding: UTF-8
       string: '{"creditor":{"reference":"democreditor"},"subscriber":{"reference":"subscriber01"},"items":[{"type":"signMandate","mandate":{"standard":"SEPA","signatory":{"honorificPrefix":"Mr","familyName":"Doe","givenName":"John","telephone":"+33612345678","email":"john.doe@gmail.com","billingAddress":{"street1":"27
         rue des fleurs","street2":"Bat 2","postalCode":"75008","city":"Paris","country":"FR"}}}}],"started":true}'
     headers:
       Authorization:
-      - Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZSI6WyJhcGkiXSwiZXhwIjoxNDk0OTE0NTM1LCJqdGkiOiI0ZDJmMzMyOS01NjhmLTQ2MmQtYjBkOC00NTAzZjYyM2NkYjAiLCJjbGllbnRfaWQiOiJkZW1vY3JlZGl0b3IwMSJ9.stpdghq1czWPnlAQkbHLTotQWh4YFwDUHIcfCUD3vEM
+      - Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZSI6WyJhcGkiXSwiZXhwIjoxNTIzMDA0NjExLCJqdGkiOiI3OWMyNTE2NS1mMmM0LTQ4Y2UtODVhZi00NDQ4N2ZiOGE2YWEiLCJjbGllbnRfaWQiOiJkZW1vY3JlZGl0b3IwMSJ9.iWomgtubVbuWwxksh3-7a5hM3VLJYbqRk5-x9raQ5FI
       Content-Type:
       - application/json
   response:
     status:
       code: 201
-      message: Created
+      message: ''
     headers:
-      Date:
-      - Tue, 16 May 2017 05:45:41 GMT
-      Server:
-      - Apache-Coyote/1.1
-      Strict-Transport-Security:
-      - max-age=63072000; includeSubdomains; preload
-      Access-Control-Allow-Origin:
-      - "*"
-      Access-Control-Allow-Methods:
-      - POST, PATCH, GET, OPTIONS, DELETE
-      Access-Control-Max-Age:
-      - '3600'
       Access-Control-Allow-Headers:
       - x-requested-with, authorization, content-type, accept
-      X-Content-Type-Options:
-      - nosniff
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Frame-Options:
-      - DENY
-      X-Application-Context:
-      - application:preprod:${rest.server.port}
-      Location:
-      - https://api-sandbox.slimpay.net/orders/e56c5a0b-39fa-11e7-9800-000000000000
+      Access-Control-Allow-Methods:
+      - POST, PATCH, GET, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '3600'
       Content-Type:
       - application/hal+json; profile="https://api.slimpay.net/alps/v1";charset=UTF-8
-      Content-Length:
-      - '1484'
+      Date:
+      - Fri, 06 Apr 2018 08:33:32 GMT
+      Location:
+      - https://api.preprod.slimpay.com/orders/31061884-3975-11e8-8fd1-000000000000
       Set-Cookie:
-      - JSESSIONID=C899F526AA4748C97CD71C34837113FC; Path=/api; HttpOnly
+      - JSESSIONID=07D755B9F67E102BAA05434A9E033CE6; Path=/; HttpOnly
+      X-Application-Context:
+      - application:8080
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - DENY
+      X-Xss-Protection:
+      - 1; mode=block
+      Content-Length:
+      - '1491'
+      Connection:
+      - keep-alive
     body:
       encoding: UTF-8
       string: |-
         {
           "_links" : {
             "self" : {
-              "href" : "https://api-sandbox.slimpay.net/orders/e56c5a0b-39fa-11e7-9800-000000000000"
+              "href" : "https://api.preprod.slimpay.com/orders/31061884-3975-11e8-8fd1-000000000000"
             },
             "profile" : {
-              "href" : "https://api-sandbox.slimpay.net/alps/v1/orders"
+              "href" : "https://api.preprod.slimpay.com/alps/v1/orders"
             },
             "https://api.slimpay.net/alps#get-creditor" : {
-              "href" : "https://api-sandbox.slimpay.net/creditors/democreditor"
+              "href" : "https://api.preprod.slimpay.com/creditors/democreditor"
             },
             "https://api.slimpay.net/alps#get-subscriber" : {
-              "href" : "https://api-sandbox.slimpay.net/orders/e56c5a0b-39fa-11e7-9800-000000000000/subscriber"
+              "href" : "https://api.preprod.slimpay.com/orders/31061884-3975-11e8-8fd1-000000000000/subscriber"
             },
             "https://api.slimpay.net/alps#get-order-items" : {
-              "href" : "https://api-sandbox.slimpay.net/orders/e56c5a0b-39fa-11e7-9800-000000000000/order-items"
+              "href" : "https://api.preprod.slimpay.com/orders/31061884-3975-11e8-8fd1-000000000000/order-items"
             },
             "https://api.slimpay.net/alps#user-approval" : {
-              "href" : "https://slimpay.net/checkout/userApproval?accessCode=spHWtB9TQa1rfXQRyNxDEI96lkJT2JQkMmxj3BMo7aaT2gu82SMnmcf9t1pPis"
+              "href" : "https://checkout.preprod.slimpay.com/userApproval?accessCode=spdMwjRLyVy9ukVPItV7JCIhWfNCpWdJUXIfXhHvgsFzySJOHb7Pauv2ccYOFZ"
             },
             "https://api.slimpay.net/alps#extended-user-approval" : {
-              "href" : "https://api-sandbox.slimpay.net/creditors/democreditor/orders/e56c5a0b-39fa-11e7-9800-000000000000/extended-user-approval{?mode}",
+              "href" : "https://api.preprod.slimpay.com/creditors/democreditor/orders/31061884-3975-11e8-8fd1-000000000000/extended-user-approval{?mode}",
               "templated" : true
             }
           },
-          "id" : "e56c5a0b-39fa-11e7-9800-000000000000",
-          "reference" : "e56c5a0b-39fa-11e7-9800-000000000000",
+          "id" : "31061884-3975-11e8-8fd1-000000000000",
+          "reference" : "31061884-3975-11e8-8fd1-000000000000",
           "state" : "open.running",
           "started" : true,
-          "dateCreated" : "2017-05-16T05:45:40.623+0000",
-          "dateModified" : "2017-05-16T05:45:40.621+0000",
+          "dateCreated" : "2018-04-06T08:33:33.111+0000",
+          "dateStarted" : "2018-04-06T08:33:33.111+0000",
           "paymentScheme" : "SEPA.DIRECT_DEBIT.CORE",
           "sendUserApproval" : false,
           "checkoutActor" : "end_user"
         }
-    http_version:
-  recorded_at: Tue, 16 May 2017 05:45:36 GMT
+    http_version: 
+  recorded_at: Fri, 06 Apr 2018 08:33:33 GMT
 recorded_with: VCR 3.0.3

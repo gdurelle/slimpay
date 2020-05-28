@@ -1,7 +1,7 @@
 module Slimpay
   class Mandate < Resource
       # POST
-    def revocate(id = 'mandate01')
+    def revoke(id = 'mandate01')
       url = "mandates/#{id}/revocation"
       body_options = {}   
 	  response = HTTParty.post("#{@endpoint}/#{url}", body: body_options.to_json, headers: options)

@@ -9,7 +9,7 @@ module Slimpay
     end
 
     def get_one(id = 1)
-      url = "#{@endpoint}/recurrent_direct_debits/#{id}"
+      url = "#{@endpoint}/recurrent-direct-debits/#{id}"
       response = HTTParty.get(url, headers: options)
       generate_api_methods(JSON.parse(response.body))
       Slimpay.answer(response)

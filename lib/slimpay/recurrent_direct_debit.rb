@@ -16,7 +16,7 @@ module Slimpay
     end
 
 	def cancel(id = 'rec-direct-debit1')
-      url = "recurrent_direct_debits/#{id}/cancellation"
+      url = "recurrent-direct-debits/#{id}/cancellation"
       body_options = {}   
 	  response = HTTParty.post("#{@endpoint}/#{url}", body: body_options.to_json, headers: options)
       follow_up_api(response)

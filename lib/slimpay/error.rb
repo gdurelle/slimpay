@@ -22,9 +22,9 @@ module Slimpay
       if defined?(http_response.code)
         display_http_error(http_response)
       else
-        @message = JSON.parse(http_response)
+        @message = JSON.parse(http_response.body)
       end
-      fail self, @message
+      fail self, "#{@message}"
     end
 
     def to_s
@@ -71,7 +71,7 @@ module Slimpay
     end
 
     def slimpay_error(http_message)
-      slimpay_error = http_message.is_a?(Hash) ? http_message : JSON.parse(http_message)
+      slimpay_error = http_message.is_a?(Hash) ? http_message : JSON.parse(http_message.body)
       slimpay_code = slimpay_error['code']
       slimpay_message = slimpay_error['message'] || slimpay_error['error_description']
       "Slimpay #{slimpay_code} : #{slimpay_message}"

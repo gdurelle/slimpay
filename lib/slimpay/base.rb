@@ -46,6 +46,7 @@ module Slimpay
         next if @methods && @methods.keys.include?(name) && !k.eql?('self')
         url = v['href']
         api_args = url.scan(/{\?(.*),?}/).flatten.first
+		
         methods[name] = generate_method(name, url, api_args)
       end
       list_api_methods(methods)
@@ -128,8 +129,10 @@ module Slimpay
     def format_html_arguments(api_args, method_arguments)
       url_args = ''
       api_args.split(',').each_with_index do |arg, index|
-        url_args += "#{arg}=#{method_arguments[arg.to_sym]}"
-        url_args += '&' if (index + 1) < api_args.size
+	    if "#{method_arguments[arg.to_sym]}".present?
+          url_args += "#{arg}=#{method_arguments[arg.to_sym]}"
+          url_args += '&' if (index + 1) < api_args.size
+		end
       end
       url_args
     end

@@ -12,6 +12,13 @@ require 'slimpay/app'
 require 'slimpay/mandate'
 require 'slimpay/order'
 require 'slimpay/direct_debit'
+require 'slimpay/creditor'
+require 'slimpay/card_alias'
+require 'slimpay/card'
+require 'slimpay/recurrent_card_transaction'
+require 'slimpay/recurrent_direct_debit'
+require 'slimpay/payment'
+
 
 # :main: README.md
 
@@ -49,7 +56,7 @@ module Slimpay
   # ===== Arguments:
   #   http_response: (HTTParty::Response)
   def self.answer(http_response)
-    return Slimpay::Error.empty if http_response.nil?
+    return Slimpay::Error.empty if http_response.try(:body).nil?
     if http_response.code >= 400
       Slimpay::Error.new(http_response)
     else

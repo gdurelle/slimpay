@@ -20,7 +20,7 @@ RSpec.describe Slimpay::Order do
     expect(Slimpay::Order.new).to respond_to :sign_mandate
   end
 
-  describe '#sign_mandate', vcr: { cassette_name: 'order_sign_mandate' } do
+  describe '#sign_mandate', vcr: {cassette_name: 'order_sign_mandate'} do
     it 'starts a mandate signature with sandbox' do
       orders = Slimpay::Order.new
       order = orders.sign_mandate

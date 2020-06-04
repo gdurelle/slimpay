@@ -3,7 +3,7 @@ require 'spec_helper'
 RSpec.describe Slimpay::Mandate do
   include_examples 'Expect OAuth and first requests', Slimpay::Mandate
 
-  subject { Slimpay::Mandate }
+  subject {Slimpay::Mandate}
 
   it 'is a Resource child' do
     allow_oauth_and_first_requests(Slimpay::Mandate)

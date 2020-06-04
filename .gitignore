@@ -9,3 +9,4 @@
 /tmp/
 builds/
 *.DS_Store
+.idea

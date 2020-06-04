@@ -41,9 +41,11 @@ module Slimpay
         subscriber: {
           reference: reference
         },
-        items: [{
-          type: 'subscriberLogin'
-        }],
+        items: [
+          {
+            type: 'subscriberLogin'
+          }
+        ],
         started: true
       }
       response = HTTParty.post("#{@endpoint}/#{url}", body: body_options.to_json, headers: options)
@@ -69,13 +71,15 @@ module Slimpay
         subscriber: {
           reference: reference
         },
-        items: [{
-          type: 'signMandate',
-          mandate: {
-            standard: 'SEPA',
-            signatory: signatory
+        items: [
+          {
+            type: 'signMandate',
+            mandate: {
+              standard: 'SEPA',
+              signatory: signatory
+            }
           }
-        }],
+        ],
         started: true
       }
       response = HTTParty.post("#{@endpoint}/#{url}", body: body_options.to_json, headers: options)

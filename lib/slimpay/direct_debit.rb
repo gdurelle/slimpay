@@ -5,7 +5,7 @@ module Slimpay
     def get_one(reference = 1)
       url = "#{@endpoint}/#{@resource_name}/#{reference}"
       response = HTTParty.get(url, headers: options)
-      generate_api_methods(JSON.parse(response))
+      generate_api_methods(JSON.parse(response.body))
       Slimpay.answer(response)
     end
 

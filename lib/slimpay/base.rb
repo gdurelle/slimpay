@@ -41,11 +41,14 @@ module Slimpay
       links = response['_links']
       links = links.merge(response['_embedded']['items'].first['_links']) if response['_embedded'] && response['_embedded']['items']
       return if links.nil?
+
       links.each do |k, v|
         name = k.gsub('https://api.slimpay.net/alps#', '').underscore
         next if @methods && @methods.keys.include?(name) && !k.eql?('self')
+
         url = v['href']
         api_args = url.scan(/{\?(.*),?}/).flatten.first
+
         methods[name] = generate_method(name, url, api_args)
       end
       list_api_methods(methods)
@@ -128,8 +131,10 @@ module Slimpay
     def format_html_arguments(api_args, method_arguments)
       url_args = ''
       api_args.split(',').each_with_index do |arg, index|
-        url_args += "#{arg}=#{method_arguments[arg.to_sym]}"
-        url_args += '&' if (index + 1) < api_args.size
+        if method_arguments[arg.to_sym].to_s.present?
+          url_args += "#{arg}=#{method_arguments[arg.to_sym]}"
+          url_args += '&' if (index + 1) < api_args.size
+        end
       end
       url_args
     end
@@ -165,7 +170,7 @@ module Slimpay
     end
 
     def options
-      { 'Authorization' => "Bearer #{@token}", 'Content-type' => 'application/json' }
+      {'Authorization' => "Bearer #{@token}", 'Content-type' => 'application/json'}
     end
 
     def sandbox?

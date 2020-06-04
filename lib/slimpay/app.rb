@@ -10,7 +10,7 @@ module Slimpay
       init_config
       @username = username || Slimpay.configuration.username
       @password = password || Slimpay.configuration.password
-      @basic_auth = { username: "#{@creditor_reference}##{@username}", password: @password }
+      @basic_auth = {username: "#{@creditor_reference}##{@username}", password: @password}
       response = HTTParty.post(@token_endpoint, basic_auth: @basic_auth, body: app_options)
       @token = response['access_token']
     end
@@ -20,13 +20,13 @@ module Slimpay
     #   app = Slimpay::App.new
     #   app.return_url = "mywebsite.com/client/123/"
     def return_url(url)
-      response = HTTParty.patch("#{@endpoint}/creditors/#{@creditor_reference}/apps/#{@client_id}", body: { returnUrl: url }.to_json, headers: options)
+      response = HTTParty.patch("#{@endpoint}/creditors/#{@creditor_reference}/apps/#{@client_id}", body: {returnUrl: url}.to_json, headers: options)
       Slimpay.answer(response)
     end
 
     # Change the notifyUrl
     def notify_url(url)
-      response = HTTParty.patch("#{@endpoint}/creditors/#{@creditor_reference}/apps/#{@client_id}", body: { notifyUrl: url }.to_json, headers: options)
+      response = HTTParty.patch("#{@endpoint}/creditors/#{@creditor_reference}/apps/#{@client_id}", body: {notifyUrl: url}.to_json, headers: options)
       Slimpay.answer(response)
     end
 

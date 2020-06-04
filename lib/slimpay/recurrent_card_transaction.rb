@@ -15,10 +15,10 @@ module Slimpay
       Slimpay.answer(response)
     end
 
-	def cancel(id = 'card-transac-1')
+    def cancel(id = 'card-transac-1')
       url = "recurrent-card-transactions/#{id}/cancellation"
-      body_options = {}   
-	  response = HTTParty.post("#{@endpoint}/#{url}", body: body_options.to_json, headers: options)
+      body_options = {}
+      response = HTTParty.post("#{@endpoint}/#{url}", body: body_options.to_json, headers: options)
       follow_up_api(response)
     end
   end

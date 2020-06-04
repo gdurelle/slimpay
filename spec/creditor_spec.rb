@@ -14,8 +14,4 @@ RSpec.describe Slimpay::Creditor do
     expect(Slimpay::Creditor.new).to respond_to :get_one
   end
 
-  it 'has its POST methods shortcuts' do
-    allow_oauth_and_first_requests(Slimpay::Creditor)
-    expect(Slimpay::Creditor.new).to respond_to :make_payment
-  end
 end

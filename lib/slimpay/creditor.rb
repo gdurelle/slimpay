@@ -8,7 +8,6 @@ module Slimpay
       super
     end
 
-
     def get_one(reference = 1)
       url = "#{@endpoint}/creditors/#{reference}"
       response = HTTParty.get(url, headers: options)

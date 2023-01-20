@@ -25,7 +25,7 @@ require 'slimpay/payment'
 # TODO: If-None-Match support. (next answer ?= 304)
 # TODO: wiki/doc full worflow: 1. App to change URls, 2. Order to sign mandate, 3. DirectDebit to pay with mandate.
 module Slimpay
-  PRODUCTION_ENDPOINT = 'https://api.slimpay.com'.freeze
+  PRODUCTION_ENDPOINT = 'https://api.slimpay.net'.freeze
   SANDBOX_ENDPOINT = 'https://api.preprod.slimpay.com'.freeze
   SANDBOX_CLIENT_ID = 'democreditor01'.freeze
   SANDBOX_SECRET_ID = 'demosecret01'.freeze
